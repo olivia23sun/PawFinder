@@ -1,0 +1,255 @@
+.add-dog-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-dog-form-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.add-dog-form-error {
+    background-color: #fee;
+    color: #c33;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #fcc;
+}
+
+.add-dog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add-dog-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.add-dog-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-dog-form-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.add-dog-form-input {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.add-dog-form-input:focus {
+    border-color: #4CAF50;
+}
+
+.add-dog-form-select {
+    padding: 0.7rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.add-dog-form-select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.add-dog-form-textarea {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+}
+
+.add-dog-form-textarea:focus {
+    border-color: #4CAF50;
+}
+
+.add-dog-form-file-input {
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-dog-form-preview {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.add-dog-form-preview img{
+    max-width: 300px;
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-dog-form-radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.add-dog-form-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.add-dog-form-submit-btn {
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.add-dog-form-submit-btn:hover {
+    background-color: #45a049;
+}
+
+.add-dog-form-submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.add-dog-form-submit-btn:disabled:hover {
+    background-color: #ccc;
+}
+/* ===== 表單按鈕樣式 ===== */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-submit,
+.btn-found,
+.btn-cancel {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-submit:hover {
+    background: #45a049;
+}
+
+.btn-found {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+}
+
+.btn-found:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.btn-cancel {
+    background: #999;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #888;
+}
+
+.btn-submit:disabled,
+.btn-found:disabled,
+.btn-cancel:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 圖片預覽容器 */
+.add-dog-form-previews {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* 單張預覽項目 */
+.add-dog-form-preview-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 2px solid #e5e7eb;
+}
+
+/* 預覽圖片 */
+.add-dog-form-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 刪除按鈕 */
+.add-dog-form-remove-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.add-dog-form-remove-btn:hover {
+    background: rgba(220, 38, 38, 1);
+    transform: scale(1.1);
+}
