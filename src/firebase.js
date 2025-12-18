@@ -4,12 +4,12 @@ import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDD_ehJph1hLn5FuFXb5lDGJQyZYL0vYpo",
-    authDomain: "lost-dog-platform.firebaseapp.com",
-    projectId: "lost-dog-platform",
-    storageBucket: "lost-dog-platform.firebasestorage.app",
-    messagingSenderId: "808963930061",
-    appId: "1:808963930061:web:83179b09c46f3a092b3684",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
