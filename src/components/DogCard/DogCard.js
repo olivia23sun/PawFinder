@@ -1,20 +1,20 @@
-import "./DogCard.css";
-import { useState } from "react";
+import './DogCard.css';
+import { useState } from 'react';
 import ContactModal from '../ContactModal/ContactModal';
 
 const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
     
     const [showContactModal, setShowContactModal] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const images = dog.imageUrls;
+    const images = dog.imageUrls || []; // ← 如果 dog.imageUrls 是 undefined 會出錯！確保至少是空陣列
     const isOwner = currentUserId && dog.userId === currentUserId;
 
-    const nextImage = (e) => {
+    const handleNextImage = (e) => {
         e.stopPropagation();
         setCurrentImageIndex((prev) => (prev + 1) % images.length);
     };
 
-    const prevImage = (e) => {
+    const handlePrevImage = (e) => {
         e.stopPropagation();
         setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
     };
@@ -53,13 +53,13 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                         <>
                             <button 
                                 className="carousel-btn carousel-btn-prev" 
-                                onClick={prevImage}
+                                onClick={handlePrevImage}
                             >
                                 ‹
                             </button>
                             <button 
                                 className="carousel-btn carousel-btn-next" 
-                                onClick={nextImage}
+                                onClick={handleNextImage}
                             >
                                 ›
                             </button>

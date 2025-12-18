@@ -90,7 +90,9 @@ export const AuthProvider = ({ children }) => {
             
             if (docSnap.exists()) {
                 setUserProfile(docSnap.data());
-            }
+            } else {
+            console.warn('使用者資料不存在');
+        }
         } catch (error) {
             console.error('取得使用者資料失敗:', error);
         }

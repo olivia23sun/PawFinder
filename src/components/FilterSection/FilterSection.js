@@ -1,6 +1,6 @@
-import { useState } from "react";
-import "./FilterSection.css" ;
-import TAIWAN_CITIES from "../../constants/taiwanCities";
+import { useState } from 'react';
+import './FilterSection.css';
+import TAIWAN_CITIES from '../../constants/taiwanCities';
 
 const FilterSection=({ onFilterChange }) => {
     const [filters, setFilters] = useState({

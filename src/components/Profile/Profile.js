@@ -9,6 +9,7 @@ const Profile = () => {
     const [myDogs, setMyDogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all'); // all, lost, found
+    const [error, setError] = useState('');
 
     // 載入我的通報
     useEffect(() => {
@@ -42,7 +43,7 @@ const Profile = () => {
             console.log('✅ 成功載入我的通報:', dogsData.length, '筆');
         } catch (error) {
             console.error('❌ 載入失敗:', error);
-            alert('載入失敗，請重新整理頁面');
+            setError('⚠️ 載入失敗，請重新整理頁面');
         } finally {
             setLoading(false);
         }
@@ -69,7 +70,11 @@ const Profile = () => {
                 alert(newStatus === 'found' ? '✅ 已標記為「已找到」' : '✅ 已改回「尋找中」');
             } catch (error) {
                 console.error('❌ 更新失敗:', error);
-                alert('更新失敗，請稍後再試');
+                if (error.code === 'permission-denied') {
+                    alert('❌ 權限不足，無法修改狀態');
+                } else {
+                    alert('❌ 更新失敗：' + error.message);
+                }
             }
         }
     };
@@ -122,7 +127,9 @@ const Profile = () => {
     }
 
     return (
+
         <div className="profile-container">
+
             {/* 個人資訊卡片 */}
             <div className="profile-header">
                 <div className="profile-avatar">
@@ -172,7 +179,12 @@ const Profile = () => {
                     已找到 ({stats.found})
                 </button>
             </div>
-
+            {error && (
+                <div className="error-message">
+                    {error}
+                    <button onClick={fetchMyDogs}>重試</button>
+                </div>
+            )}
             {/* 我的通報列表 */}
             <div className="profile-dogs-section">
                 <h3>我的通報</h3>

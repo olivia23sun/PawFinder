@@ -22,6 +22,7 @@ function AppContent() {
   const [showForm, setShowForm] = useState(false); 
   const [editingDog, setEditingDog] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const [error, setError] = useState(''); 
 
 // 從 Firebase 讀取資料
   useEffect(() => {
@@ -42,6 +43,13 @@ function AppContent() {
       console.log('✅ 成功讀取資料:', dogsData);
     } catch (error) {
       console.error('❌ 讀取失敗:', error);
+
+      // ✅ 判斷錯誤類型
+      if (error.code === 'unavailable') {
+          setError('⚠️ 網路連線失敗，請檢查您的網路');
+      } else {
+          setError('❌ 資料載入失敗，請稍後再試');
+      }
     } finally {
       setLoading(false);
     }
@@ -168,7 +176,15 @@ const handleEdit = (dog) => {
         alert('✅ 刪除成功！');
       } catch (error) {
         console.error('❌ 刪除失敗:', error);
-        alert('刪除失敗，請稍後再試');
+        
+        // 根據錯誤類型顯示不同訊息
+        if (error.code === 'permission-denied') {
+          alert('❌ 權限不足，無法刪除');
+        } else if (error.code === 'unavailable') {
+          alert('❌ 網路連線失敗，請檢查網路');
+        } else {
+          alert('❌ 刪除失敗：' + error.message);
+        }
       }
     }
   };
@@ -206,6 +222,18 @@ const handleEdit = (dog) => {
 
 
       <div className="container">
+        {error && (
+          <div style={{
+            padding: '20px',
+            background: '#fee',
+            color: '#c33',
+            borderRadius: '8px',
+            margin: '20px',
+            textAlign: 'center'
+          }}>
+            {error}
+          </div>
+        )}
         {/* 編輯表單（條件顯示）*/}
         {editingDog && (
           <div id="edit-dog-form">

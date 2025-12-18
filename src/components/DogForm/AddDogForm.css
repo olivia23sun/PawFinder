@@ -1,4 +1,4 @@
-.add-dog-form-container {
+.form-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -7,13 +7,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.add-dog-form-title {
+.form-title {
     text-align: center;
     color: #333;
     margin-bottom: 30px;
 }
 
-.add-dog-form-error {
+.form-error {
     background-color: #fee;
     color: #c33;
     padding: 12px;
@@ -22,31 +22,31 @@
     border: 1px solid #fcc;
 }
 
-.add-dog-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.add-dog-form-row {
+.form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
-.add-dog-form-group {
+.form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.add-dog-form-label {
+.form-label {
     font-weight: 600;
     color: #555;
     font-size: 14px;
 }
 
-.add-dog-form-input {
+.form-input {
     padding: 12px;
     border: 2px solid #ddd;
     border-radius: 8px;
@@ -55,11 +55,11 @@
     outline: none;
 }
 
-.add-dog-form-input:focus {
+.form-input:focus {
     border-color: #4CAF50;
 }
 
-.add-dog-form-select {
+.form-select {
     padding: 0.7rem;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -67,12 +67,12 @@
     transition: border-color 0.3s;
 }
 
-.add-dog-form-select:focus {
+.form-select:focus {
     border-color: #4CAF50;
     outline: none;
 }
 
-.add-dog-form-textarea {
+.form-textarea {
     padding: 12px;
     border: 2px solid #ddd;
     border-radius: 8px;
@@ -82,48 +82,30 @@
     outline: none;
 }
 
-.add-dog-form-textarea:focus {
+.form-textarea:focus {
     border-color: #4CAF50;
 }
 
-.add-dog-form-file-input {
+.form-file-input {
     padding: 10px;
     border: 2px dashed #ddd;
     border-radius: 8px;
     cursor: pointer;
 }
 
-.add-dog-form-preview {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-}
-
-
-.add-dog-form-preview img{
-    max-width: 300px;
-    max-height: 300px;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.add-dog-form-radio-group {
+.form-radio-group {
     display: flex;
     gap: 20px;
 }
 
-.add-dog-form-radio-label {
+.form-radio-label {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
 }
 
-.add-dog-form-submit-btn {
+.form-submit-btn {
     padding: 15px;
     background-color: #4CAF50;
     color: white;
@@ -136,18 +118,19 @@
     transition: background-color 0.3s;
 }
 
-.add-dog-form-submit-btn:hover {
+.form-submit-btn:hover {
     background-color: #45a049;
 }
 
-.add-dog-form-submit-btn:disabled {
+.form-submit-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.add-dog-form-submit-btn:disabled:hover {
+.form-submit-btn:disabled:hover {
     background-color: #ccc;
 }
+
 /* ===== 表單按鈕樣式 ===== */
 .form-actions {
     display: flex;
@@ -205,7 +188,7 @@
 }
 
 /* 圖片預覽容器 */
-.add-dog-form-previews {
+.form-previews {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
@@ -213,7 +196,7 @@
 }
 
 /* 單張預覽項目 */
-.add-dog-form-preview-item {
+.form-preview-item {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
@@ -222,7 +205,7 @@
 }
 
 /* 預覽圖片 */
-.add-dog-form-preview {
+.form-preview {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -230,7 +213,7 @@
 }
 
 /* 刪除按鈕 */
-.add-dog-form-remove-btn {
+.form-remove-btn {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -249,7 +232,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.add-dog-form-remove-btn:hover {
+.form-remove-btn:hover {
     background: rgba(220, 38, 38, 1);
     transform: scale(1.1);
 }

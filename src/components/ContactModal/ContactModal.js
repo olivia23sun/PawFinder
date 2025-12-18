@@ -1,9 +1,9 @@
 import './ContactModal.css';
 
-function ContactModal({ dog, onClose }) {
+const ContactModal = ({ dog, onClose }) => {
     if (!dog) return null;
 
-    const copyToClipboard = (text) => {
+    const handleCopyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         alert('✅ 已複製到剪貼簿！');
     };
@@ -43,7 +43,7 @@ function ContactModal({ dog, onClose }) {
                                     撥打電話
                                 </button>
                                 <button 
-                                    onClick={() => copyToClipboard(dog.contactPhone)} 
+                                    onClick={() => handleCopyToClipboard(dog.contactPhone)} 
                                     className="btn-copy"
                                 >
                                     📋

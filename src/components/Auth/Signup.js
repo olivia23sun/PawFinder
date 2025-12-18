@@ -71,12 +71,12 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
             );
             
             alert('✅ 註冊成功！歡迎加入 PawFinder');
-              if (onClose) {
+                if (onClose) {
     console.log('✅ 執行 onClose');
     onClose();
-  } else {
+    } else {
     console.error('❌ onClose 未定義！');
-  }
+    }
 
         } catch (err) {
             console.error('註冊失敗:', err);
