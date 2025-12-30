@@ -1,12 +1,14 @@
+/* ========== Header 基本樣式 ========== */
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 0;
-    position: sticky;
+    position: sticky;  /* 滾動時固定在頂部 */
     top: 0;
-    z-index: 100;
+    z-index: 100;  /* 確保在其他內容之上 */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* ========== 導覽列佈局 ========== */
 nav {
     max-width: 1400px;
     margin: 0 auto;
@@ -16,6 +18,7 @@ nav {
     padding: 16px 40px;
 }
 
+/* ========== Logo ========== */
 .header-logo {
     font-size: 28px;
     font-weight: 700;
@@ -25,9 +28,10 @@ nav {
 }
 
 .header-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.05);  /* 滑鼠懸停放大效果 */
 }
 
+/* ========== 選單連結 ========== */
 .menu-link {
     display: flex;
     list-style: none;
@@ -46,17 +50,19 @@ nav {
     border-radius: 6px;
 }
 
+/* 半透明白色背景提供視覺回饋 */
 .menu-link a:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ========== 新增：會員相關樣式 ========== */
+/* ========== 使用者操作區 ========== */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* 使用者資訊標籤 */
 .user-info {
     color: white;
     font-weight: 500;
@@ -66,6 +72,7 @@ nav {
     font-size: 14px;
 }
 
+/* ========== 發布按鈕 ========== */
 .btn-post {
     background-color: white;
     color: #667eea;
@@ -79,10 +86,11 @@ nav {
 }
 
 .btn-post:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px);  /* 上移提供互動感 */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* ========== 登入/註冊/登出按鈕 ========== */
 .btn-login,
 .btn-signup,
 .btn-logout {
@@ -95,6 +103,7 @@ nav {
     border: none;
 }
 
+/* 登入按鈕：透明背景 + 白色邊框 */
 .btn-login {
     background-color: transparent;
     color: white;
@@ -106,6 +115,7 @@ nav {
     color: #667eea;
 }
 
+/* 註冊按鈕：實心白色背景 */
 .btn-signup {
     background-color: white;
     color: #667eea;
@@ -117,6 +127,7 @@ nav {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* 登出按鈕：半透明背景 */
 .btn-logout {
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
@@ -128,7 +139,7 @@ nav {
     border-color: white;
 }
 
-/* RWD */
+/* ========== 響應式設計 ========== */
 @media (max-width: 768px) {
     nav {
         flex-direction: column;

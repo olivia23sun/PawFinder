@@ -1,16 +1,21 @@
+/* ========== 容器設定 ========== */
 .container{
     max-width: 1200px;
     margin: 2rem auto;
     padding:  0 2rem;
 }
 
+/* ========== 響應式卡片網格 ========== */
+/* 使用 Grid 實現響應式卡片佈局 */
 .cards-grid{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
     gap: 2rem;
 }
 
+/* ========== 卡片基本樣式 ========== */
 .dog-card{
+    position: relative;  /* 為已找到遮罩提供定位基準 */
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
@@ -24,10 +29,11 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* ========== 圖片區域 ========== */
 .card-image {
     width: 100%;
     height: 250px;
-    object-fit: cover;  /* 裁切圖片以填滿容器 */
+    object-fit: cover;  /* 裁切圖片以填滿容器，保持比例 */
     display: block;
 }
 
@@ -35,7 +41,7 @@
     padding: 1.5rem;
 }
 
-
+/* ========== 卡片內容 ========== */
 .card-title {
     font-size: 1.4rem;
     margin-bottom: 0.8rem;
@@ -56,6 +62,8 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+/* ========== 標籤樣式 ========== */
 .badge {
     display: inline-block;
     padding: 0.3rem 0.8rem;
@@ -63,6 +71,8 @@
     font-size: 0.85rem;
     font-weight: 600;
 }
+
+/* 項圈狀態標籤 */
 .badge-collar {
     background: #83eece34;
     color: #15b442;
@@ -72,6 +82,7 @@
     color: #f57c00;
 }
 
+/* 性別標籤 */
 .boy-gender {
     background: #e3f2fd;
     color: #1976d2;
@@ -81,6 +92,7 @@
     color: #f9527ee6;
 }
 
+/* ========== 卡片底部 ========== */
 .card-footer {
     padding: 1rem 1.5rem;
     background: #f8f9fa;
@@ -108,7 +120,7 @@
     transform: translateY(-2px);
 }
 
-/* ========== 編輯/刪除按鈕樣式 ========== */
+/* ========== 編輯/刪除按鈕區 ========== */
 .card-actions {
     display: flex;
     gap: 10px;
@@ -133,6 +145,7 @@
     gap: 6px;
 }
 
+/* 漸層背景提升視覺質感 */
 .btn-edit {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -161,7 +174,7 @@
 }
 
 .dog-card {
-    position: relative;  /* 確保有這行 */
+    position: relative;  
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
@@ -170,6 +183,8 @@
     cursor: pointer;
 }
 
+/* ========== 已找到狀態遮罩 ========== */
+/* 使用絕對定位覆蓋整張卡片 */
 .found-overlay {
     position: absolute;
     top: 0;
@@ -177,11 +192,11 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 10;
+    z-index: 10;  /* 確保在所有卡片內容之上 */
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);  /* 背景模糊效果 */
 }
 
 .found-badge {
@@ -192,9 +207,10 @@
     font-size: 2rem;
     font-weight: 700;
     box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
-    transform: rotate(-5deg);
+    transform: rotate(-5deg);  /* 微旋轉增加活潑感 */
 }
 
+/* 脈衝動畫（未使用，保留供未來擴展） */
 @keyframes foundPulse {
     0%, 100% {
         transform: rotate(-5deg) scale(1);

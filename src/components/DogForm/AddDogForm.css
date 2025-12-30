@@ -1,3 +1,4 @@
+/* ========== 表單容器 ========== */
 .form-container {
     max-width: 800px;
     margin: 0 auto;
@@ -13,6 +14,7 @@
     margin-bottom: 30px;
 }
 
+/* ========== 錯誤訊息 ========== */
 .form-error {
     background-color: #fee;
     color: #c33;
@@ -22,12 +24,14 @@
     border: 1px solid #fcc;
 }
 
+/* ========== 表單佈局 ========== */
 .form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* Grid 佈局實現左右兩欄 */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -46,6 +50,7 @@
     font-size: 14px;
 }
 
+/* ========== 輸入欄位 ========== */
 .form-input {
     padding: 12px;
     border: 2px solid #ddd;
@@ -55,6 +60,7 @@
     outline: none;
 }
 
+/* Focus 狀態改變邊框顏色提供視覺回饋 */
 .form-input:focus {
     border-color: #4CAF50;
 }
@@ -77,8 +83,8 @@
     border: 2px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
-    font-family: inherit;
-    resize: vertical;
+    font-family: inherit;  /* 繼承父元素字體，避免系統預設 */
+    resize: vertical;  /* 只允許垂直調整大小 */
     outline: none;
 }
 
@@ -86,6 +92,8 @@
     border-color: #4CAF50;
 }
 
+/* ========== 檔案上傳 ========== */
+/* 虛線邊框提示可點擊上傳 */
 .form-file-input {
     padding: 10px;
     border: 2px dashed #ddd;
@@ -93,6 +101,7 @@
     cursor: pointer;
 }
 
+/* ========== 單選按鈕 ========== */
 .form-radio-group {
     display: flex;
     gap: 20px;
@@ -105,6 +114,7 @@
     cursor: pointer;
 }
 
+/* ========== 送出按鈕 ========== */
 .form-submit-btn {
     padding: 15px;
     background-color: #4CAF50;
@@ -122,6 +132,7 @@
     background-color: #45a049;
 }
 
+/* 禁用狀態：降低透明度並改變游標 */
 .form-submit-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
@@ -131,7 +142,7 @@
     background-color: #ccc;
 }
 
-/* ===== 表單按鈕樣式 ===== */
+/* ========== 功能按鈕組 ========== */
 .form-actions {
     display: flex;
     gap: 10px;
@@ -160,6 +171,7 @@
     background: #45a049;
 }
 
+/* 漸層背景提升視覺層次 */
 .btn-found {
     background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
     color: white;
@@ -187,7 +199,8 @@
     opacity: 0.6;
 }
 
-/* 圖片預覽容器 */
+/* ========== 圖片預覽區 ========== */
+/* Grid 自動填充，最小 150px */
 .form-previews {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -195,24 +208,24 @@
     margin-top: 15px;
 }
 
-/* 單張預覽項目 */
+/* 使用 aspect-ratio 保持正方形 */
 .form-preview-item {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    aspect-ratio: 1;
+    aspect-ratio: 1;  /* 保持 1:1 比例 */
     border: 2px solid #e5e7eb;
 }
 
-/* 預覽圖片 */
 .form-preview {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;  /* 裁切圖片填滿容器 */
     display: block;
 }
 
-/* 刪除按鈕 */
+/* ========== 圖片刪除按鈕 ========== */
+/* 絕對定位在右上角 */
 .form-remove-btn {
     position: absolute;
     top: 8px;
@@ -234,5 +247,5 @@
 
 .form-remove-btn:hover {
     background: rgba(220, 38, 38, 1);
-    transform: scale(1.1);
+    transform: scale(1.1);  /* 放大提供互動回饋 */
 }

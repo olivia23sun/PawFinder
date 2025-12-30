@@ -3,21 +3,27 @@ import './ContactModal.css';
 const ContactModal = ({ dog, onClose }) => {
     if (!dog) return null;
 
+    // ========== 複製到剪貼簿 ==========
     const handleCopyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         alert('✅ 已複製到剪貼簿！');
     };
 
+    // ========== 撥打電話 ==========
     const handleCall = () => {
         window.location.href = `tel:${dog.contactPhone}`;
     };
 
     return (
+        // 點擊遮罩關閉 Modal
         <div className="modal-overlay" onClick={onClose}>
+            {/* 點擊內容不關閉 Modal */}
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="modal-close" onClick={onClose}>✕</button>
                 
                 <h2>聯繫飼主</h2>
+
+                {/* 狗狗資訊 */}
                 <div className="dog-info-header">
                     <img src={dog.imageUrl} alt={dog.name} />
                     <div>
@@ -26,14 +32,15 @@ const ContactModal = ({ dog, onClose }) => {
                     </div>
                 </div>
 
+                {/* 聯絡資訊 */}
                 <div className="contact-section">
-
                     {dog.contactName && (
                         <div className="contact-item">
                             <label>飼主資訊</label>
                             <span className="contact-value">{dog.contactName}</span>
                         </div>
                     )}
+                    
                     {dog.contactPhone && (
                         <div className="contact-item">
                             <label>📞 聯絡電話</label>
@@ -53,6 +60,7 @@ const ContactModal = ({ dog, onClose }) => {
                     )}
                 </div>
 
+                {/* 安全提醒 */}
                 <div className="warning-box">
                     <p>⚠️ 溫馨提醒</p>
                     <ul>
@@ -64,6 +72,6 @@ const ContactModal = ({ dog, onClose }) => {
             </div>
         </div>
     );
-}
+};
 
 export default ContactModal;

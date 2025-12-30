@@ -2,38 +2,43 @@ import './DogCard.css';
 import { useState } from 'react';
 import ContactModal from '../ContactModal/ContactModal';
 
-const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
-    
+const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
     const [showContactModal, setShowContactModal] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const images = dog.imageUrls || []; // ← 如果 dog.imageUrls 是 undefined 會出錯！確保至少是空陣列
+    
+    // ========== 防呆處理：確保 imageUrls 是陣列 ==========
+    const images = dog.imageUrls || [];
+    
+    // ========== 權限判斷：是否為發布者 ==========
     const isOwner = currentUserId && dog.userId === currentUserId;
 
+    // ========== 圖片輪播：下一張 ==========
     const handleNextImage = (e) => {
-        e.stopPropagation();
+        e.stopPropagation();  // 防止觸發卡片點擊事件
         setCurrentImageIndex((prev) => (prev + 1) % images.length);
     };
 
+    // ========== 圖片輪播：上一張 ==========
     const handlePrevImage = (e) => {
         e.stopPropagation();
         setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
-      // 計算走失天數
+    // ========== 計算走失天數 ==========
     const getDaysLost = () => {
-    if (!dog.createdAt) return null;
-    const now = new Date();
-    const lostDate = dog.createdAt.toDate();
-    const days = Math.floor((now - lostDate) / (1000 * 60 * 60 * 24));
-    return days;
+        if (!dog.createdAt) return null;
+        const now = new Date();
+        const lostDate = dog.createdAt.toDate();
+        const days = Math.floor((now - lostDate) / (1000 * 60 * 60 * 24));
+        return days;
     };
 
     const daysLost = getDaysLost();
 
-    return(
+    return (
         <>
-                <div className="dog-card">
-                {/* ✅ 已尋獲遮罩 */}
+            <div className="dog-card">
+                {/* ========== 已尋獲遮罩 ========== */}
                 {dog.status === 'found' && (
                     <div className="found-overlay">
                         <div className="found-badge">
@@ -42,6 +47,7 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                     </div>
                 )}
 
+                {/* ========== 圖片輪播區 ========== */}
                 <div className="card-image-wrapper">
                     <img 
                         src={images[currentImageIndex]} 
@@ -49,6 +55,7 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                         className="card-image"
                     />
                     
+                    {/* 多張圖片時顯示左右切換按鈕 */}
                     {images.length > 1 && (
                         <>
                             <button 
@@ -63,6 +70,8 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                             >
                                 ›
                             </button>
+                            
+                            {/* 圖片指示器 */}
                             <div className="carousel-indicators">
                                 {images.map((_, index) => (
                                     <span 
@@ -77,35 +86,53 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                             </div>
                         </>
                     )}
-                </div>         
-                        {/* 走失天數標籤 */}
-                {daysLost !== null && (
-                <div className="dog-card-days-badge">
-                    走失 {daysLost} 天
                 </div>
+
+                {/* ========== 走失天數標籤 ========== */}
+                {daysLost !== null && (
+                    <div className="dog-card-days-badge">
+                        走失 {daysLost} 天
+                    </div>
                 )}
                 
+                {/* ========== 卡片內容 ========== */}
                 <div className="card-content">
-                        <h3 className="card-title">{dog.name}</h3>
-                        <div className="card-info">
-                            <div className="info-item">
-                                📍 {dog.location}
-                            </div>
-                            <div className="info-item">
-                                <span className={`badge ${(dog.gender==="公") ? 'boy-gender' : 'girl-gender'}`}>{dog.gender}</span>    
-
-                                <span className={`badge ${dog.collar ? 'badge-collar' : 'badge-no-collar'}`}>{dog.collar ? '有項圈' : '無項圈'}</span>
-                            </div>
-                            <div className="info-item">
-                                💬 {dog.description}
-                            </div>
+                    <h3 className="card-title">{dog.name}</h3>
+                    <div className="card-info">
+                        <div className="info-item">
+                            📍 {dog.location}
+                        </div>
+                        <div className="info-item">
+                            <span className={`badge ${dog.gender === '公' ? 'boy-gender' : 'girl-gender'}`}>
+                                {dog.gender}
+                            </span>
+                            <span className={`badge ${dog.collar ? 'badge-collar' : 'badge-no-collar'}`}>
+                                {dog.collar ? '有項圈' : '無項圈'}
+                            </span>
+                        </div>
+                        <div className="info-item">
+                            💬 {dog.description}
                         </div>
                     </div>
-                    <div className="card-footer">
-                        {dog.createdAt && (<span className="date">通報時間：{dog.createdAt.toDate().toLocaleDateString('zh-TW')}</span>)}
-                        <a href="#contact" className="contact-btn" onClick={() => setShowContactModal(true)}>聯繫飼主</a>
-                    </div>
-                    
+                </div>
+
+                {/* ========== 卡片底部 ========== */}
+                <div className="card-footer">
+                    {dog.createdAt && (
+                        <span className="date">
+                            通報時間：{dog.createdAt.toDate().toLocaleDateString('zh-TW')}
+                        </span>
+                    )}
+                    <a 
+                        href="#contact" 
+                        className="contact-btn" 
+                        onClick={() => setShowContactModal(true)}
+                    >
+                        聯繫飼主
+                    </a>
+                </div>
+                
+                {/* ========== 編輯/刪除按鈕（只有發布者看得到）========== */}
                 {isOwner && (
                     <div className="card-actions">
                         <button 
@@ -116,24 +143,23 @@ const DogCard = ({dog, onEdit, onDelete, currentUserId}) => {
                         </button>
                         <button 
                             className="btn-delete"
-                            onClick={() => onDelete(dog.id)}
+                            onClick={() => onDelete(dog.id, dog.userId)}
                         >
                             🗑️ 刪除
                         </button>
                     </div>
-                )}                   
-                </div>
-                
-                
-                {showContactModal && (
+                )}
+            </div>
+            
+            {/* ========== 聯絡 Modal ========== */}
+            {showContactModal && (
                 <ContactModal 
                     dog={dog}
                     onClose={() => setShowContactModal(false)}
                 />
-                )}
-    </>
-
+            )}
+        </>
     );
-}
+};
 
 export default DogCard;

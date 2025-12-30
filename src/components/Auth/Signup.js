@@ -24,25 +24,21 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
     };
 
     const validateForm = () => {
-        // 檢查必填欄位
         if (!formData.displayName || !formData.email || !formData.password || !formData.phone) {
             setError('❌ 請填寫所有欄位');
             return false;
         }
 
-        // 檢查密碼長度
         if (formData.password.length < 6) {
             setError('❌ 密碼至少需要 6 個字元');
             return false;
         }
 
-        // 檢查密碼是否一致
         if (formData.password !== formData.confirmPassword) {
             setError('❌ 兩次密碼輸入不一致');
             return false;
         }
 
-        // 檢查手機號碼格式
         const phoneRegex = /^09\d{8}$/;
         if (!phoneRegex.test(formData.phone.replace(/[- ]/g, ''))) {
             setError('❌ 請輸入有效的手機號碼（例：0912345678）');
@@ -72,16 +68,15 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
             
             alert('✅ 註冊成功！歡迎加入 PawFinder');
                 if (onClose) {
-    console.log('✅ 執行 onClose');
-    onClose();
-    } else {
-    console.error('❌ onClose 未定義！');
-    }
+                console.log('✅ 執行 onClose');
+                onClose();
+                } else {
+                console.error('❌ onClose 未定義！');
+                }
 
         } catch (err) {
             console.error('註冊失敗:', err);
             
-            // 處理不同的錯誤訊息
             switch (err.code) {
                 case 'auth/email-already-in-use':
                     setError('❌ 此電子郵件已被註冊');

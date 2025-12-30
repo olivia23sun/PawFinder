@@ -34,12 +34,10 @@ const Login = ({ onSwitchToSignup, onClose }) => {
         try {
             await login(formData.email, formData.password);
             alert('✅ 登入成功！');
-            onClose(); //關閉視窗
+            onClose(); 
         } catch (err) {
             console.error('登入失敗:', err);
-            
-            // 處理不同的錯誤訊息
-            switch (err.code) {
+                switch (err.code) {
                 case 'auth/invalid-email':
                     setError('❌ 電子郵件格式不正確');
                     break;

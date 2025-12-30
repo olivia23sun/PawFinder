@@ -1,43 +1,48 @@
-.container{
+/* ========== 容器設定 ========== */
+.container {
     max-width: 1200px;
     margin: 2rem auto;
-    padding:  0 2rem;
+    padding: 0 2rem;
 }
 
-.filter-section{
+/* ========== 篩選區塊 ========== */
+.filter-section {
     background-color: white;
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     margin: 2rem 0;
 }
 
-.filter-title{
+.filter-title {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
     color: #333;
 }
 
-.filters{
+/* ========== 篩選器佈局 ========== */
+/* Grid 自動填充，每個篩選器最小 200px */
+.filters {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
 }
 
-.filter-group{
+.filter-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.filter-group label{
+.filter-group label {
     font-weight: 500;
     color: #555;
     font-size: 0.9rem;
 }
 
+/* ========== 輸入欄位樣式 ========== */
 .filter-group select,
-.filter-group input{
+.filter-group input {
     padding: 0.7rem;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -45,13 +50,14 @@
     transition: border-color 0.3s;
 }
 
+/* Focus 狀態提供視覺回饋 */
 .filter-group select:focus,
 .filter-group input:focus {
     outline: none;
     border-color: #667eea;
 }
 
-/* 重置按鈕樣式 */
+/* ========== 重置按鈕 ========== */
 .reset-btn {
     margin-top: 25px;
     padding: 10px 20px;
@@ -65,10 +71,11 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
     width: 100%;
-    /* ✅ 新增：在 grid 中佔滿整行 */
+    
+    /* Grid 中佔滿整行 */
     grid-column: 1 / -1;
     
-    /* ✅ 新增：內容置中 */
+    /* 內容置中 */
     justify-self: center;
     max-width: 300px;
 }

@@ -9,6 +9,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const AddDogForm = ({ onSuccess }) => {
   const { currentUser, userProfile } = useAuth();
   
+  // ========== 表單狀態管理 ==========
   const [formData, setFormData] = useState({
     name: '',
     breed: '',
@@ -23,6 +24,7 @@ const AddDogForm = ({ onSuccess }) => {
     description: ''
   });
   
+  // ========== 自動填入會員資料 ==========
   useEffect(() => {
     if (userProfile) {
       setFormData(prev => ({
@@ -33,13 +35,13 @@ const AddDogForm = ({ onSuccess }) => {
     }
   }, [userProfile]);
 
-  const [imageFiles, setImageFiles] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);      // 圖片檔案陣列
+  const [imagePreviews, setImagePreviews] = useState([]); // 預覽圖網址陣列
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0];  // 今天日期（YYYY-MM-DD）
 
-  // 處理一般輸入欄位
+  // ========== 處理一般輸入欄位 ==========
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -48,6 +50,7 @@ const AddDogForm = ({ onSuccess }) => {
     }));
   };
 
+  // ========== 處理圖片選擇 ==========
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     
@@ -59,7 +62,7 @@ const AddDogForm = ({ onSuccess }) => {
 
     // 驗證每個檔案
     for (let file of files) {
-      // 驗證檔案大小 (2MB)
+      // 驗證檔案大小 (2MB = 2 * 1024 * 1024 bytes)
       if (file.size > 2 * 1024 * 1024) {
         setError('每張圖片大小不能超過 2MB');
         return;
@@ -74,7 +77,7 @@ const AddDogForm = ({ onSuccess }) => {
 
     setError('');
 
-    // 產生預覽圖
+    // ========== 產生預覽圖 ==========
     const newPreviews = [];
     let loadedCount = 0;
 
@@ -90,37 +93,38 @@ const AddDogForm = ({ onSuccess }) => {
           setImagePreviews(prev => [...prev, ...newPreviews]);
         }
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file);  // 讀取為 Base64
     });
   };
 
-  // 刪除單張圖片
+  // ========== 刪除單張圖片 ==========
   const removeImage = (index) => {
     setImageFiles(prev => prev.filter((_, i) => i !== index));
     setImagePreviews(prev => prev.filter((_, i) => i !== index));
   };
 
-  // 上傳單張圖片到 Firebase Storage
+  // ========== 上傳單張圖片到 Firebase Storage ==========
   const uploadImage = async (file) => {
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(7);
     const filename = `dogs/${timestamp}_${randomStr}_${file.name}`;
     const storageRef = ref(storage, filename);
     
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+    await uploadBytes(storageRef, file);  // 上傳檔案
+    const url = await getDownloadURL(storageRef);  // 取得下載網址
     return url;
   };
 
-  // 上傳所有圖片
+  // ========== 上傳所有圖片 ==========
   const uploadAllImages = async (files) => {
     const uploadPromises = files.map(file => uploadImage(file));
-    return await Promise.all(uploadPromises);
+    return await Promise.all(uploadPromises);  // 平行上傳
   };
 
-  // 表單驗證
+  // ========== 表單驗證 ==========
   const validateForm = () => {
     const phoneRegex = /^09\d{8}$/;
+    
     // 定義必填欄位
     const requiredFields = {
       name: '狗狗名字',
@@ -143,6 +147,7 @@ const AddDogForm = ({ onSuccess }) => {
       }
     }
 
+    // 驗證日期不能是未來
     const selectedDate = new Date(formData.lostDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -152,19 +157,22 @@ const AddDogForm = ({ onSuccess }) => {
       return false;
     }
     
+    // 驗證手機號碼格式
     if (!phoneRegex.test(formData.contactPhone.replace(/[- ]/g, ''))) {
       setError('請輸入有效的手機號碼（例：0912345678）');
       return false;
     }
     
+    // 檢查至少上傳一張圖片
     if (imageFiles.length === 0) {
       setError('請至少上傳 1 張狗狗照片');
       return false;
     }
+    
     return true;
   };
 
-  // 送出表單
+  // ========== 送出表單 ==========
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -176,18 +184,17 @@ const AddDogForm = ({ onSuccess }) => {
     setError('');
 
     try {
-      // 1. 上傳圖片
+      // 1. 上傳圖片到 Firebase Storage
       const imageUrls = await uploadAllImages(imageFiles);
 
-      // 2. 準備資料（imageUrls 改為陣列，同時保留 imageUrl 向後相容）
-      // ✅ 加入會員資訊
+      // 2. 準備資料
       const dogData = {
         ...formData,
-        imageUrls,
-        createdAt: Timestamp.now(),
-        status: 'lost',
-        userId: currentUser.uid,  // ✅ 紀錄發布者ID
-        userEmail: currentUser.email  // ✅ 紀錄發布者Email
+        imageUrls,  // 圖片網址陣列
+        createdAt: Timestamp.now(),  // 建立時間戳記
+        status: 'lost',  // 預設狀態
+        userId: currentUser.uid,  // 紀錄發布者ID
+        userEmail: currentUser.email  // 紀錄發布者Email
       };
 
       // 3. 新增到 Firestore
@@ -203,8 +210,8 @@ const AddDogForm = ({ onSuccess }) => {
         collar: '',
         location: '',
         lostDate: '',
-        contactName: userProfile?.displayName || '',  // ✅ 保留會員資訊
-        contactPhone: userProfile?.phone || '',  // ✅ 保留會員資訊
+        contactName: userProfile?.displayName || '',
+        contactPhone: userProfile?.phone || '',
         description: ''
       });
       setImageFiles([]);
@@ -241,6 +248,7 @@ const AddDogForm = ({ onSuccess }) => {
             onChange={handleImageChange}
             className="form-file-input"
           />
+          
           {/* 圖片預覽區 */}
           {imagePreviews.length > 0 && (
             <div className="form-previews">

@@ -1,3 +1,4 @@
+/* ========== 個人中心容器 ========== */
 .profile-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -5,6 +6,7 @@
 }
 
 /* ========== 個人資訊卡片 ========== */
+/* 使用漸層背景提升視覺層次 */
 .profile-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 16px;
@@ -17,6 +19,7 @@
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
+/* 圓形頭像容器 */
 .profile-avatar {
     width: 100px;
     height: 100px;
@@ -42,7 +45,8 @@
     font-size: 16px;
 }
 
-/* ========== 統計資訊 ========== */
+/* ========== 統計資訊區 ========== */
+/* Grid 佈局實現三欄統計 */
 .profile-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -59,6 +63,7 @@
     transition: transform 0.3s;
 }
 
+/* 懸停時上移效果 */
 .stat-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
@@ -77,7 +82,7 @@
     font-weight: 500;
 }
 
-/* ========== 篩選按鈕 ========== */
+/* ========== 篩選按鈕組 ========== */
 .profile-filters {
     display: flex;
     gap: 12px;
@@ -101,6 +106,7 @@
     color: #667eea;
 }
 
+/* 啟用狀態：漸層背景 */
 .filter-btn.active {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -119,6 +125,8 @@
     gap: 20px;
 }
 
+/* ========== 通報卡片 ========== */
+/* Flex 佈局：圖片左側，內容右側 */
 .profile-dog-card {
     background: white;
     border-radius: 12px;
@@ -133,12 +141,12 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* 圖片區 */
+/* 固定圖片寬度 */
 .profile-dog-image {
     width: 200px;
     height: 200px;
     position: relative;
-    flex-shrink: 0;
+    flex-shrink: 0;  /* 防止圖片被壓縮 */
 }
 
 .profile-dog-image img {
@@ -158,6 +166,7 @@
     font-size: 14px;
 }
 
+/* 已找到標籤 */
 .found-badge {
     position: absolute;
     top: 10px;
@@ -170,7 +179,8 @@
     font-weight: 600;
 }
 
-/* 資訊區 */
+/* ========== 卡片內容區 ========== */
+/* Flex column 實現垂直排列 */
 .profile-dog-info {
     flex: 1;
     padding: 20px;
@@ -191,6 +201,7 @@
     color: #333;
 }
 
+/* 狀態標籤 */
 .status-badge {
     padding: 6px 16px;
     border-radius: 20px;
@@ -219,7 +230,7 @@
     font-size: 15px;
 }
 
-/* 操作按鈕 */
+/* ========== 操作按鈕 ========== */
 .profile-dog-actions {
     display: flex;
     gap: 10px;
@@ -288,7 +299,7 @@
     margin-bottom: 10px;
 }
 
-/* ========== RWD ========== */
+/* ========== 響應式設計 ========== */
 @media (max-width: 768px) {
     .profile-header {
         flex-direction: column;
@@ -302,10 +313,12 @@
         font-size: 36px;
     }
 
+    /* 統計區改為單欄 */
     .profile-stats {
         grid-template-columns: 1fr;
     }
 
+    /* 卡片改為上下排列 */
     .profile-dog-card {
         flex-direction: column;
     }

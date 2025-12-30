@@ -18,18 +18,12 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         description: dog.description || ''
     });
 
-    // 現有圖片（從資料庫讀取）
     const [existingImages, setExistingImages] = useState(dog.imageUrls || []);
-
-    // 新上傳的圖片
     const [newImageFiles, setNewImageFiles] = useState([]);
     const [newImagePreviews, setNewImagePreviews] = useState([]);
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
     const today = new Date().toISOString().split('T')[0];
-    // 計算總圖片數量
     const totalImages = existingImages.length + newImageFiles.length;
 
     const handleChange = (e) => {
@@ -43,13 +37,11 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
 
-        // 檢查是否超過 3 張
         if (totalImages + files.length > 3) {
             setError(`最多只能有 3 張照片（目前：${totalImages} 張）`);
             return;
         }
 
-        // 驗證每個檔案
         for (let file of files) {
             if (file.size > 2 * 1024 * 1024) {
                 setError('每張圖片大小不能超過 2MB');
@@ -63,7 +55,6 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
 
         setError('');
 
-        // 產生預覽圖
         const newPreviews = [];
         let loadedCount = 0;
 
@@ -82,18 +73,15 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         });
     };
 
-    // 刪除現有圖片
     const removeExistingImage = (index) => {
         setExistingImages(prev => prev.filter((_, i) => i !== index));
     };
 
-    // 刪除剛上傳但還沒儲存的新圖片
     const removeNewImage = (index) => {
         setNewImageFiles(prev => prev.filter((_, i) => i !== index));
         setNewImagePreviews(prev => prev.filter((_, i) => i !== index));
     };
 
-    // 上傳單張圖片
     const uploadImage = async (file) => {
         const timestamp = Date.now();
         const randomStr = Math.random().toString(36).substring(7);
@@ -105,7 +93,6 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         return url;
     };
 
-    // 上傳所有新圖片
     const uploadAllNewImages = async (files) => {
         if (files.length === 0) return [];
         const uploadPromises = files.map(file => uploadImage(file));
@@ -139,10 +126,8 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 清空舊錯誤
         setError('');
 
-        // 驗證必填欄位
         if (!formData.name.trim()) {
             setError('❌ 請輸入狗狗名字');
             return;
@@ -159,13 +144,8 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         setLoading(true);
 
         try {
-            // 1. 上傳新圖片
             const newImageUrls = await uploadAllNewImages(newImageFiles);
-
-            // 2. 合併現有圖片 + 新圖片網址
             const allImageUrls = [...existingImages, ...newImageUrls];
-
-            // 3. 更新 Firestore
             const dogRef = doc(db, 'lostDogs', dog.id);
             await updateDoc(dogRef, {
                 ...formData,
@@ -198,13 +178,11 @@ return (
                 ✅ 標記為已尋獲
             </button>
 
-            {/* 圖片管理區 */}
             <div className="edit-form-group">
                 <label className="edit-form-label">
                     狗狗照片 ({totalImages}/3)
                 </label>
 
-                {/* 現有圖片 */}
                 {existingImages.length > 0 && (
                     <div>
                         <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
@@ -231,7 +209,6 @@ return (
                     </div>
                 )}
 
-                {/* 新上傳的圖片 */}
                 {newImagePreviews.length > 0 && (
                     <div style={{ marginTop: '15px' }}>
                         <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
@@ -258,8 +235,7 @@ return (
                     </div>
                 )}
 
-                {/* 上傳按鈕 */}
-                {totalImages < 3 && (
+\                {totalImages < 3 && (
                     <input
                         type="file"
                         accept="image/*"

@@ -1,4 +1,5 @@
-/* 遮罩層 */
+/* ========== 登入/註冊 Modal 遮罩層 ========== */
+/* Fixed 定位覆蓋整個畫面 */
 .auth-modal-overlay {
     position: fixed;
     top: 0;
@@ -9,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000;  /* 確保在所有內容之上 */
     animation: fadeIn 0.3s ease;
 }
 
@@ -18,7 +19,7 @@
     to { opacity: 1; }
 }
 
-/* 彈窗主體 */
+/* ========== Modal 主體 ========== */
 .auth-modal {
     background: white;
     border-radius: 16px;
@@ -30,6 +31,7 @@
     animation: slideUp 0.3s ease;
 }
 
+/* 從下往上滑入動畫 */
 @keyframes slideUp {
     from {
         opacity: 0;
@@ -41,7 +43,8 @@
     }
 }
 
-/* 關閉按鈕 */
+/* ========== 關閉按鈕 ========== */
+/* 絕對定位在右上角 */
 .auth-modal-close {
     position: absolute;
     top: 16px;
@@ -65,7 +68,7 @@
     color: #333;
 }
 
-/* 標題 */
+/* ========== 標題 ========== */
 .auth-title {
     text-align: center;
     color: #333;
@@ -74,7 +77,7 @@
     font-weight: 700;
 }
 
-/* 錯誤訊息 */
+/* ========== 錯誤訊息 ========== */
 .auth-error {
     background-color: #fee;
     color: #c33;
@@ -85,7 +88,7 @@
     font-size: 14px;
 }
 
-/* 表單 */
+/* ========== 表單 ========== */
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -104,6 +107,7 @@
     font-size: 14px;
 }
 
+/* ========== 輸入欄位 ========== */
 .auth-input {
     padding: 12px 16px;
     border: 2px solid #e0e0e0;
@@ -112,13 +116,14 @@
     transition: all 0.2s;
 }
 
+/* Focus 狀態：邊框變色 + 陰影 */
 .auth-input:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-/* 送出按鈕 */
+/* ========== 送出按鈕 ========== */
 .auth-submit-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -141,12 +146,13 @@
     transform: translateY(0);
 }
 
+/* 禁用狀態：灰色 + 不可點擊 */
 .auth-submit-btn:disabled {
     background: linear-gradient(135deg, #999 0%, #888 100%);
     cursor: not-allowed;
 }
 
-/* 切換連結 */
+/* ========== 切換連結 ========== */
 .auth-switch {
     text-align: center;
     margin-top: 24px;
@@ -169,7 +175,7 @@
     color: #764ba2;
 }
 
-/* RWD */
+/* ========== 響應式設計 ========== */
 @media (max-width: 768px) {
     .auth-modal {
         padding: 30px 24px;

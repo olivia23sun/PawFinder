@@ -9,18 +9,11 @@ import {
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
-// AuthContext 是一個「全域狀態管理器」，用來：
-// 1管理使用者的登入狀態
-// 2提供登入/註冊/登出的功能給所有組件使用
-// 3自動監聽使用者狀態變化
-
-
-// 建立一個「資料倉庫」，讓所有組件都能存取使用者資訊
-// 類似一個「全域變數」，但更強大
+// ========== 建立 Context ==========
+// 用於在整個應用程式中共享使用者狀態
 const AuthContext = createContext();
 
-// 自訂 Hook：方便其他組件使用
-//讓其他組件可以輕鬆取得使用者資訊
+// ========== 自訂 Hook：方便其他元件使用 ==========
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -29,28 +22,23 @@ export const useAuth = () => {
     return context;
 };
 
+// ========== Auth Provider：狀態管理中心 ==========
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [userProfile, setUserProfile] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState(null);        // Firebase Auth 使用者
+    const [userProfile, setUserProfile] = useState(null);        // Firestore 使用者資料
+    const [loading, setLoading] = useState(true);                // 初始載入狀態
 
-    // 註冊
+    // ========== 註冊功能 ==========
     const signup = async (email, password, displayName, phone) => {
         try {
             // 1. 建立 Firebase Auth 帳號
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password); //固定寫法
-            const user = userCredential.user; 
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-            // 2. 更新顯示名稱
-            await updateProfile(user, { displayName }); 
-            //等於 await updateProfile(user, { displayName: displayName });
-            //因為變數名稱相同，可以簡寫成 { displayName }
+            // 2. 更新 Auth 的顯示名稱
+            await updateProfile(user, { displayName });
 
-            //updateProfile用途：更新身份驗證相關的基本資料
-            //可更新欄位：只有 displayName 和 photoURL
-            //時機：註冊時設定名稱、更換大頭照
-
-            // 3. 在 Firestore 建立使用者資料
+            // 3. 在 Firestore 建立使用者文件（儲存完整資料）
             await setDoc(doc(db, 'users', user.uid), {
                 uid: user.uid,
                 email: email,
@@ -59,9 +47,6 @@ export const AuthProvider = ({ children }) => {
                 createdAt: new Date(),
                 role: 'user'
             });
-            // setDoc用途：儲存完整的使用者資料
-            // 可儲存欄位：任何自訂欄位（phone, address, role...）
-            // 時機：需要儲存 Auth 沒有的額外資料(也可以存auth裡有的，通常會重複存，因為希望在 Firestore 文件裡有完整資料，不用切換資料來源)
 
             return user;
         } catch (error) {
@@ -70,19 +55,18 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // 登入
+    // ========== 登入功能 ==========
     const login = async (email, password) => {
+        // Firebase 會自動觸發 onAuthStateChanged
         return await signInWithEmailAndPassword(auth, email, password);
-        // 使用 Firebase 的 signInWithEmailAndPassword 驗證
-        // 驗證成功後，Firebase 會自動觸發 onAuthStateChanged
     };
 
-    // 登出
+    // ========== 登出功能 ==========
     const logout = async () => {
         return await signOut(auth);
     };
 
-    // 取得使用者詳細資料
+    // ========== 從 Firestore 取得使用者詳細資料 ==========
     const fetchUserProfile = async (uid) => {
         try {
             const docRef = doc(db, 'users', uid);
@@ -90,57 +74,47 @@ export const AuthProvider = ({ children }) => {
             
             if (docSnap.exists()) {
                 setUserProfile(docSnap.data());
-            } else {
-            console.warn('使用者資料不存在');
-        }
+            }
         } catch (error) {
             console.error('取得使用者資料失敗:', error);
         }
     };
 
-    // 監聽使用者登入狀態
+    // ========== 監聽登入狀態變化 ==========
+    // 當使用者登入/登出時自動觸發
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            setCurrentUser(user);
-            // 不管 user 是什麼都存入
-            // 登入時：存使用者物件
-            // 登出時：存 null
+            setCurrentUser(user);  // 更新 Auth 使用者
             
             if (user) {
+                // 登入時：載入 Firestore 資料
                 await fetchUserProfile(user.uid);
             } else {
+                // 登出時：清空資料
                 setUserProfile(null);
             }
             
-            setLoading(false);
+            setLoading(false);  // 完成初始載入
         });
 
+        // 清理函式：元件卸載時取消監聽
         return unsubscribe;
-
-        //  useEffect：回傳清理函式
-
-             //return () => {  // ← 不是立即執行
-                //console.log(data);
-                //};
-                //     ↑
-                //     React 把這個函式「存起來」
-                //     等組件卸載時才執行
     }, []);
 
+    // ========== 提供給子元件的值 ==========
     const value = {
-        currentUser,
-        userProfile,
-        signup,
-        login,
-        logout,
-        loading
+        currentUser,    // Firebase Auth 使用者物件
+        userProfile,    // Firestore 使用者資料
+        signup,         // 註冊函式
+        login,          // 登入函式
+        logout,         // 登出函式
+        loading         // 載入狀態
     };
 
     return (
         <AuthContext.Provider value={value}>
-            {/* value 物件會傳遞給所有使用 useAuth() 的組件 */}
-            {!loading && children}  
-            {/* 等載入完成才顯示內容 */}
+            {/* 等載入完成才顯示子元件 */}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

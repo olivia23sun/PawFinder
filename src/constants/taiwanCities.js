@@ -20,23 +20,3 @@ const TAIWAN_CITIES = [
 ];
 
 export default TAIWAN_CITIES;
-
-// // const TAIWAN_CITIES = [
-//     { value: 'keelung', label: '基隆市' },
-//     { value: 'taipei', label: '臺北市' },
-//     { value: 'newtaipei', label: '新北市' },
-//     { value: 'taoyuan', label: '桃園市' },
-//     { value: 'hsinchu', label: '新竹市' },
-//     { value: 'miaoli', label: '苗栗市' },
-//     { value: 'taichung', label: '臺中市' },
-//     { value: 'changhua', label: '彰化市' },
-//     { value: 'yunlin', label: '雲林市' },
-//     { value: 'chiayi', label: '嘉義市' },
-//     { value: 'tainan', label: '臺南市' },
-//     { value: 'kaohsiung', label: '高雄市' },
-//     { value: 'pingtung', label: '屏東市' },
-//     { value: 'taitung', label: '臺東市' },
-//     { value: 'hualien', label: '花蓮市' },
-//     { value: 'yilan', label: '宜蘭市' },
-
-// ];

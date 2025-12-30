@@ -1,3 +1,5 @@
+/* ========== Modal 遮罩層 ========== */
+/* Fixed 定位覆蓋整個視窗 */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -8,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000;  /* 確保在所有內容之上 */
     animation: fadeIn 0.2s;
 }
 
@@ -17,6 +19,7 @@
     to { opacity: 1; }
 }
 
+/* ========== Modal 內容 ========== */
 .modal-content {
     background: white;
     border-radius: 20px;
@@ -24,12 +27,13 @@
     max-width: 500px;
     width: 90%;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: auto;  /* 內容過多時可滾動 */
     position: relative;
     animation: slideUp 0.3s;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* 從下往上滑入動畫 */
 @keyframes slideUp {
     from {
         transform: translateY(50px);
@@ -41,6 +45,8 @@
     }
 }
 
+/* ========== 關閉按鈕 ========== */
+/* 絕對定位在右上角 */
 .modal-close {
     position: absolute;
     top: 15px;
@@ -57,7 +63,7 @@
 
 .modal-close:hover {
     background: #e0e0e0;
-    transform: rotate(90deg);
+    transform: rotate(90deg);  /* 旋轉效果 */
 }
 
 .modal-content h2 {
@@ -66,6 +72,7 @@
     text-align: center;
 }
 
+/* ========== 狗狗資訊區 ========== */
 .dog-info-header {
     display: flex;
     gap: 15px;
@@ -94,6 +101,7 @@
     font-size: 0.9rem;
 }
 
+/* ========== 聯絡資訊區 ========== */
 .contact-section {
     display: flex;
     flex-direction: column;
@@ -121,6 +129,7 @@
     border-radius: 8px;
 }
 
+/* ========== 聯絡操作區 ========== */
 .contact-actions {
     display: flex;
     gap: 10px;
@@ -132,6 +141,7 @@
     margin: 0;
 }
 
+/* ========== 操作按鈕 ========== */
 .btn-call, .btn-copy {
     padding: 10px 16px;
     border: none;
@@ -141,6 +151,7 @@
     transition: all 0.3s;
 }
 
+/* 撥打電話按鈕：漸層背景 */
 .btn-call {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -152,6 +163,7 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+/* 複製按鈕：固定寬度 */
 .btn-copy {
     background: #f0f0f0;
     width: 45px;
@@ -162,6 +174,7 @@
     background: #e0e0e0;
 }
 
+/* ========== 警告提示框 ========== */
 .warning-box {
     background: #fff3cd;
     padding: 15px;
