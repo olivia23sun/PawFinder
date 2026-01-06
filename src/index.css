@@ -1,24 +1,128 @@
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
+/* ========== 基礎設定 ========== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html{
-    scroll-behavior: smooth; 
+/* ========== 響應式字體縮放 ========== */
+/*
+使用 rem 單位實現全站字體自動縮放
+- 桌機 (1024px+): 1rem = 16px
+- 平板 (768px):   1rem = 15px  
+- 手機 (480px):   1rem = 13px
+- 小手機 (360px): 1rem = 12px
+*/
+
+/* 桌機：預設 16px */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #333;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ========== 響應式字體斷點 ========== */
+
+/* 大螢幕 (1920px+) */
+@media (min-width: 1920px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* 筆電 (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+/* 小筆電 (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* 平板橫向 (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+/* 平板直向 / 大手機 (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* 手機直向 (361px - 480px) */
+@media (min-width: 361px) and (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+/* 超小手機 (最大 360px) */
+@media (max-width: 360px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+/* ========== 文字可讀性優化 ========== */
+@media (max-width: 768px) {
+    body {
+        /* iOS Safari 最小字體優化 */
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
     
+    /* 標題行高優化 */
+    h1, h2, h3 {
+        line-height: 1.3;
+    }
+    
+    /* 內文行高 */
+    p, span, div {
+        line-height: 1.6;
+    }
+    
+    /* 按鈕觸控優化 */
+    button {
+        min-height: 44px; /* iOS 建議觸控尺寸 */
+    }
+}
+
+/* ========== 顏色對比優化 ========== */
+
+/* 深色背景上的白色文字 */
+header, .hero {
+    color: #fff;
+}
+
+/* 連結樣式 */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

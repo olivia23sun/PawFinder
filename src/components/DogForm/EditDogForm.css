@@ -218,3 +218,211 @@
     cursor: not-allowed;
     opacity: 0.6;
 }
+
+/* ========== RWD 響應式設計 ========== */
+
+/* 平板尺寸 */
+@media (max-width: 1024px) {
+    .edit-form-container {
+        max-width: 700px;
+    }
+}
+
+/* 小平板 */
+@media (max-width: 768px) {
+    .edit-form-container {
+        padding: 18px;
+        margin: 1rem;
+    }
+    
+    .edit-form-title {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+    
+    .edit-form {
+        gap: 18px;
+    }
+    
+    /* 保持兩欄，但縮小間距 */
+    .edit-form-row {
+        gap: 12px;
+    }
+    
+    .edit-form-label {
+        font-size: 13px;
+    }
+    
+    .edit-form-input,
+    .edit-form-select,
+    .edit-form-textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    /* 圖片預覽改為兩欄 */
+    .edit-form-previews {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .btn-found {
+        padding: 14px;
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+    
+    .edit-form-actions {
+        gap: 8px;
+    }
+    
+    .btn-save,
+    .btn-cancel {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+/* 手機直向 */
+@media (max-width: 480px) {
+    .edit-form-container {
+        padding: 15px;
+        margin: 0.5rem;
+        border-radius: 10px;
+    }
+    
+    .edit-form-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .edit-form {
+        gap: 15px;
+    }
+    
+    /* 改為單欄 */
+    .edit-form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .edit-form-group {
+        gap: 6px;
+    }
+    
+    .edit-form-label {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .edit-form-input,
+    .edit-form-select,
+    .edit-form-textarea {
+        padding: 12px;
+        font-size: 16px; /* iOS 避免自動縮放 */
+        border-width: 1px;
+    }
+    
+    /* 圖片上傳區 */
+    .edit-form-file-input {
+        padding: 12px;
+        font-size: 14px;
+        text-align: center;
+        background: #f8f9fa;
+        border-color: #667eea;
+        color: #667eea;
+        font-weight: 500;
+    }
+    
+    /* 圖片預覽保持兩欄 */
+    .edit-form-previews {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    /* 圖片刪除按鈕放大 */
+    .edit-form-remove-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+    
+    /* 標記已尋獲按鈕 */
+    .btn-found {
+        padding: 14px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        min-height: 48px; /* iOS 觸控優化 */
+    }
+    
+    /* 功能按鈕改為垂直排列 */
+    .edit-form-actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .btn-save,
+    .btn-cancel {
+        padding: 14px;
+        font-size: 16px;
+        min-height: 48px;
+    }
+    
+    .edit-form-error {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* 超小手機 */
+@media (max-width: 360px) {
+    .edit-form-container {
+        padding: 12px;
+    }
+    
+    .edit-form-title {
+        font-size: 1.2rem;
+    }
+    
+    .edit-form-input,
+    .edit-form-select,
+    .edit-form-textarea {
+        padding: 10px;
+    }
+    
+    /* 圖片預覽改為單欄 */
+    .edit-form-previews {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-found,
+    .btn-save,
+    .btn-cancel {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+/* ========== 改善手機版 UX ========== */
+@media (max-width: 768px) {
+    /* iOS Safari 樣式優化 */
+    .edit-form-input,
+    .edit-form-select,
+    .edit-form-textarea {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    
+    /* select 自訂下拉箭頭 */
+    .edit-form-select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 35px;
+    }
+    
+    /* 日期選擇器優化 */
+    .edit-form-input[type="date"] {
+        position: relative;
+    }
+}

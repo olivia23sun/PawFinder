@@ -198,3 +198,148 @@
     margin: 5px 0;
     font-size: 0.9rem;
 }
+
+/* ========== RWD 響應式設計 ========== */
+
+/* 平板尺寸 */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 25px 20px;
+        width: 92%;
+        max-height: 85vh;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .dog-info-header {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .dog-info-header img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .dog-info-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .contact-section {
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-item label {
+        font-size: 0.9rem;
+    }
+    
+    .contact-value {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* 手機直向 */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 20px 15px;
+        width: 95%;
+        border-radius: 15px;
+    }
+    
+    .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.2rem;
+        padding-right: 30px; /* 避免被關閉按鈕遮住 */
+    }
+    
+    /* 狗狗資訊區改為垂直排列 */
+    .dog-info-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .dog-info-header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%; /* 圓形頭像效果 */
+    }
+    
+    /* 聯絡操作改為垂直排列 */
+    .contact-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .contact-actions .contact-value {
+        text-align: center;
+        font-size: 0.95rem;
+    }
+    
+    .btn-call {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    
+    .btn-copy {
+        width: 100%;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    /* 警告框調整 */
+    .warning-box {
+        padding: 12px;
+    }
+    
+    .warning-box p {
+        font-size: 0.9rem;
+    }
+    
+    .warning-box ul {
+        padding-left: 18px;
+    }
+    
+    .warning-box li {
+        font-size: 0.85rem;
+    }
+}
+
+/* 超小手機 */
+@media (max-width: 360px) {
+    .modal-content {
+        padding: 15px 12px;
+    }
+    
+    .dog-info-header {
+        padding: 12px;
+    }
+    
+    .dog-info-header img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .contact-value {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    
+    .btn-call {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}

@@ -89,3 +89,161 @@
 .reset-btn:active {
     transform: translateY(0);
 }
+
+/* ========== RWD 響應式設計 ========== */
+
+/* 平板尺寸 (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    /* 改為 3 欄 */
+    .filters {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 小平板 (481px - 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+    
+    .filter-section {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .filter-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    /* 改為 2 欄 */
+    .filters {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+    
+    .filter-group label {
+        font-size: 0.85rem;
+    }
+    
+    .filter-group select,
+    .filter-group input {
+        padding: 0.6rem;
+        font-size: 0.95rem;
+    }
+    
+    /* 重置按鈕佔滿兩欄 */
+    .reset-btn {
+        margin-top: 15px;
+        max-width: 100%;
+    }
+}
+
+/* 手機直向 (最大 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .filter-section {
+        padding: 1.2rem;
+        margin: 1rem 0;
+        border-radius: 12px;
+    }
+    
+    .filter-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    /* 單欄顯示 */
+    .filters {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .filter-group {
+        gap: 0.4rem;
+    }
+    
+    .filter-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .filter-group select,
+    .filter-group input {
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-width: 1px;
+    }
+    
+    /* 重置按鈕調整 */
+    .reset-btn {
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 1rem;
+        max-width: 100%;
+    }
+}
+
+/* 超小手機 (最大 360px) */
+@media (max-width: 360px) {
+    .filter-section {
+        padding: 1rem;
+    }
+    
+    .filter-title {
+        font-size: 1rem;
+    }
+    
+    .filters {
+        gap: 0.8rem;
+    }
+    
+    .filter-group select,
+    .filter-group input {
+        padding: 0.65rem;
+        font-size: 0.95rem;
+    }
+    
+    .reset-btn {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========== 改善手機版 UX ========== */
+
+/* 手機上讓 select/input 更容易點擊 */
+@media (max-width: 768px) {
+    .filter-group select,
+    .filter-group input {
+        /* iOS Safari 優化 */
+        -webkit-appearance: none;
+        appearance: none;
+        
+        /* 自訂下拉箭頭 */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 35px;
+    }
+    
+    /* input 不需要箭頭 */
+    .filter-group input {
+        background-image: none;
+        padding-right: 0.7rem;
+    }
+    
+    /* 按鈕觸控優化 */
+    .reset-btn {
+        min-height: 44px; /* iOS 建議最小觸控尺寸 */
+    }
+}
