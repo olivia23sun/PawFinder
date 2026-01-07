@@ -9,9 +9,8 @@ const Profile = () => {
     const [myDogs, setMyDogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [filter, setFilter] = useState('all'); // all, lost, found
+    const [filter, setFilter] = useState('all');
 
-    // ========== 初始化：載入我的通報 ==========
     useEffect(() => {
         if (currentUser) {
             fetchMyDogs();
@@ -19,17 +18,16 @@ const Profile = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 
-    // ========== 從 Firestore 查詢當前使用者的通報 ==========
+    // 從 Firestore 查詢當前使用者的通報
     const fetchMyDogs = async () => {
         try {
             setLoading(true);
             setError('');
             
-            // 建立查詢：只抓當前使用者的通報，並按時間排序
             const q = query(
                 collection(db, 'lostDogs'),
-                where('userId', '==', currentUser.uid),  // 篩選條件
-                orderBy('createdAt', 'desc')             // 由新到舊排序
+                where('userId', '==', currentUser.uid),
+                orderBy('createdAt', 'desc')
             );
             
             const snapshot = await getDocs(q);
@@ -48,7 +46,7 @@ const Profile = () => {
         }
     };
 
-    // ========== 切換狀態：已找到 ⇄ 尋找中 ==========
+    // 切換狀態：「已找到」⇄「尋找中」
     const handleToggleStatus = async (dogId, currentStatus) => {
         const newStatus = currentStatus === 'found' ? 'lost' : 'found';
         const confirmMsg = newStatus === 'found' 
@@ -74,12 +72,11 @@ const Profile = () => {
         }
     };
 
-    // ========== 刪除通報 ==========
     const handleDelete = async (dogId) => {
         if (window.confirm('確定要刪除這筆通報嗎？此操作無法復原！')) {
             try {
                 await deleteDoc(doc(db, 'lostDogs', dogId));
-                // 從本地狀態移除，避免重新查詢
+                // 更新本地狀態，避免重新查詢
                 setMyDogs(prev => prev.filter(dog => dog.id !== dogId));
                 alert('✅ 刪除成功！');
             } catch (error) {
@@ -89,20 +86,19 @@ const Profile = () => {
         }
     };
 
-    // ========== 計算統計資訊 ==========
+    // 統計資訊
     const stats = {
         total: myDogs.length,
         lost: myDogs.filter(dog => dog.status === 'lost').length,
         found: myDogs.filter(dog => dog.status === 'found').length
     };
 
-    // ========== 根據篩選器過濾通報 ==========
+    // 前端篩選（Firestore 對多條件查詢有限制）
     const filteredDogs = myDogs.filter(dog => {
         if (filter === 'all') return true;
         return dog.status === filter;
     });
 
-    // ========== 計算走失天數 ==========
     const getDaysLost = (createdAt) => {
         if (!createdAt) return null;
         const now = new Date();
@@ -111,7 +107,10 @@ const Profile = () => {
         return days;
     };
 
-    // ========== 未登入狀態 ==========
+    // ========== Early Return Pattern：避免巢狀條件 ==========
+    // 按優先級處理 UI 狀態，確保每個狀態互斥
+    
+    // 1. 未登入
     if (!currentUser) {
         return (
             <div className="profile-container">
@@ -123,60 +122,19 @@ const Profile = () => {
         );
     }
 
-    return (
-        <div className="profile-container">
-            {/* ========== 個人資訊卡片 ========== */}
-            <div className="profile-header">
-                <div className="profile-avatar">
-                    {userProfile?.displayName?.[0]?.toUpperCase() || '👤'}
-                </div>
-                <div className="profile-info">
-                    <h2>{userProfile?.displayName || '使用者'}</h2>
-                    <p>{userProfile?.email || currentUser.email}</p>
-                    <p>📞 {userProfile?.phone || '未設定'}</p>
-                </div>
+    // 2. 載入中
+    if (loading) {
+        return (
+            <div className="profile-container">
+                <p style={{ textAlign: 'center', padding: '40px' }}>載入中...</p>
             </div>
+        );
+    }
 
-            {/* ========== 統計資訊 ========== */}
-            <div className="profile-stats">
-                <div className="stat-card">
-                    <div className="stat-number">{stats.total}</div>
-                    <div className="stat-label">總通報數</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-number" style={{ color: '#f59e0b' }}>{stats.lost}</div>
-                    <div className="stat-label">尋找中</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-number" style={{ color: '#10b981' }}>{stats.found}</div>
-                    <div className="stat-label">已找到</div>
-                </div>
-            </div>
-
-            {/* ========== 篩選按鈕 ========== */}
-            <div className="profile-filters">
-                <button 
-                    className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-                    onClick={() => setFilter('all')}
-                >
-                    全部 ({stats.total})
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'lost' ? 'active' : ''}`}
-                    onClick={() => setFilter('lost')}
-                >
-                    尋找中 ({stats.lost})
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'found' ? 'active' : ''}`}
-                    onClick={() => setFilter('found')}
-                >
-                    已找到 ({stats.found})
-                </button>
-            </div>
-
-            {/* ========== 錯誤訊息 ========== */}
-            {error && (
+    // 3. 錯誤狀態（直接 return，避免同時顯示錯誤和空資料提示）
+    if (error) {
+        return (
+            <div className="profile-container">
                 <div style={{
                     padding: '20px',
                     background: '#fee',
@@ -201,19 +159,75 @@ const Profile = () => {
                         重試
                     </button>
                 </div>
-            )}
+            </div>
+        );
+    }
 
-            {/* ========== 我的通報列表 ========== */}
+    // 4. 正常狀態：渲染完整介面
+    return (
+        <div className="profile-container">
+            {/* 個人資訊卡片 */}
+            <div className="profile-header">
+                <div className="profile-avatar">
+                    {userProfile?.displayName?.[0]?.toUpperCase() || '👤'}
+                </div>
+                <div className="profile-info">
+                    <h2>{userProfile?.displayName || '使用者'}</h2>
+                    <p>{userProfile?.email || currentUser.email}</p>
+                    <p>📞 {userProfile?.phone || '未設定'}</p>
+                </div>
+            </div>
+
+            {/* 統計資訊 */}
+            <div className="profile-stats">
+                <div className="stat-card">
+                    <div className="stat-number">{stats.total}</div>
+                    <div className="stat-label">總通報數</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-number" style={{ color: '#f59e0b' }}>{stats.lost}</div>
+                    <div className="stat-label">尋找中</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-number" style={{ color: '#10b981' }}>{stats.found}</div>
+                    <div className="stat-label">已找到</div>
+                </div>
+            </div>
+
+            {/* 篩選按鈕 */}
+            <div className="profile-filters">
+                <button 
+                    className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+                    onClick={() => setFilter('all')}
+                >
+                    全部 ({stats.total})
+                </button>
+                <button 
+                    className={`filter-btn ${filter === 'lost' ? 'active' : ''}`}
+                    onClick={() => setFilter('lost')}
+                >
+                    尋找中 ({stats.lost})
+                </button>
+                <button 
+                    className={`filter-btn ${filter === 'found' ? 'active' : ''}`}
+                    onClick={() => setFilter('found')}
+                >
+                    已找到 ({stats.found})
+                </button>
+            </div>
+
+            {/* 我的通報列表 */}
             <div className="profile-dogs-section">
                 <h3>我的通報</h3>
                 
-                {loading ? (
-                    <p style={{ textAlign: 'center', padding: '40px' }}>載入中...</p>
-                ) : filteredDogs.length === 0 ? (
+                {/* 空資料判斷 */}
+                {filteredDogs.length === 0 ? (
                     <div className="profile-empty">
                         <p>😢 尚無通報資料</p>
                         <p style={{ fontSize: '14px', color: '#666' }}>
-                            {filter !== 'all' ? '切換到「全部」查看所有通報' : '點選上方「發佈走失資訊」開始通報'}
+                            {filter !== 'all' 
+                                ? '切換到「全部」查看所有通報' 
+                                : '點選上方「發佈走失資訊」開始通報'}
                         </p>
                     </div>
                 ) : (
@@ -259,13 +273,13 @@ const Profile = () => {
                                             className="action-btn edit-btn"
                                             onClick={() => window.location.hash = `edit-${dog.id}`}
                                         >
-                                            ✏️ 編輯
+                                            編輯
                                         </button>
                                         <button 
                                             className="action-btn delete-btn"
                                             onClick={() => handleDelete(dog.id)}
                                         >
-                                            🗑️ 刪除
+                                            刪除
                                         </button>
                                     </div>
                                 </div>
