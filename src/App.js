@@ -21,12 +21,36 @@ function AppContent() {
   const [error, setError] = useState('');            // 錯誤訊息
   const [showForm, setShowForm] = useState(false);   // 是否顯示新增表單
   const [editingDog, setEditingDog] = useState(null); // 正在編輯的狗狗
-  const [showProfile, setShowProfile] = useState(false); // 是否顯示個人中心
+
+   // ========== 從 URL hash 讀取初始頁面 ==========
+  const getInitialPage = () => {
+    const hash = window.location.hash.slice(1);
+    if (hash === 'profile') {
+      return hash;
+    }
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getInitialPage());
+
+  // ========== 監聽 URL hash 變化 ==========
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash === 'profile' || hash === 'home' || hash === '') {
+        setCurrentPage(hash || 'home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // ========== 初始化：從 Firebase 載入資料 ==========
   useEffect(() => {
     fetchDogs();
   }, []);
+  
 
   // ========== 從 Firestore 讀取所有通報 ==========
   const fetchDogs = async () => {
@@ -114,7 +138,13 @@ function AppContent() {
   const handleShowForm = () => {
     setEditingDog(null);  // 清空編輯狀態
     setShowForm(!showForm); // 切換表單顯示
-    
+
+    // 確保在首頁顯示表單
+    if (!showForm) {
+      window.location.hash = 'home';
+      setCurrentPage('home');
+    }
+
     // 延遲滾動，等表單渲染完成
     setTimeout(() => {
       document.getElementById('add-dog-form')?.scrollIntoView({ 
@@ -131,7 +161,7 @@ function AppContent() {
       // 先清空狀態，強制重新渲染
       setEditingDog(null);
       setShowForm(false);
-      setShowProfile(false);
+      setCurrentPage('home'); 
       
       // 延遲設定新資料
       setTimeout(() => {
@@ -186,7 +216,8 @@ function AppContent() {
   const handleGoHome = () => {
     setShowForm(false);
     setEditingDog(null);
-    setShowProfile(false);
+    setCurrentPage('home');
+    window.location.hash = 'home';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -194,7 +225,8 @@ function AppContent() {
   const handleShowProfile = () => {
     setShowForm(false);
     setEditingDog(null);
-    setShowProfile(true);
+    setCurrentPage('profile');
+    window.location.hash = 'profile'; 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -206,11 +238,9 @@ function AppContent() {
         onGoHome={handleGoHome}
         onShowProfile={handleShowProfile}
       />
-      
-      {/* 條件顯示：個人中心 or 首頁 */}
-      {showProfile ? (
-        <Profile />
-      ) : (
+
+{currentPage === 'profile' && <Profile />}
+{currentPage === 'home' && (
         <>
           <HeroCarousel />
           <FilterSection onFilterChange={handleFilterChange} />
@@ -272,15 +302,15 @@ function AppContent() {
                   marginBottom: '20px',
                   fontWeight: '500'
                 }}>
-                  📊 顯示 <strong style={{ color: '#667eea' }}>{filteredDogs.length}</strong> 隻狗狗
+                  顯示 <strong style={{ color: 'rgb(80,80,80)',fontSize: '30px' }}>{filteredDogs.length}</strong> 隻毛孩
                 </p>
               
                 <section className="cards-grid">
                   {filteredDogs.length === 0 ? (
                     <p style={{ textAlign: 'center', padding: '40px' }}>
                       {dogs.length === 0 
-                        ? '目前沒有走失狗狗資料'
-                        : '沒有符合條件的狗狗 😢'}
+                        ? '目前沒有走失毛孩資料'
+                        : '沒有符合條件的毛孩 😢'}
                     </p>
                   ) : (
                     filteredDogs.map(dog => (

@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import Login from '../Auth/Login.js';
 import Signup from '../Auth/Signup.js';
 
-const Header = ({ onShowForm, showForm, onGoHome, onShowProfile }) => {
+const Header = ({ onShowForm, showForm, onGoHome, onShowProfile, onShowAbout }) => {
     const { currentUser, userProfile, logout } = useAuth();
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
@@ -32,7 +32,7 @@ const Header = ({ onShowForm, showForm, onGoHome, onShowProfile }) => {
             onGoHome(); 
         }
     };
-    
+
     // ========== 開啟個人中心 ==========
     const handleProfileClick = (e) => {
         e.preventDefault();
@@ -63,20 +63,20 @@ const Header = ({ onShowForm, showForm, onGoHome, onShowProfile }) => {
                         🐾 PawFinder
                     </div>
                     <div className="menu-link">
-                        <li><a href="#home" onClick={handleHomeClick}>首頁</a></li>
-                        {currentUser && (
-                            <li><a href="#profile" onClick={handleProfileClick}>個人中心</a></li>
-                        )}
-                        <li><a href="#about">關於我們</a></li>                    
+                        <li><a href="#home" onClick={handleHomeClick}>首頁</a></li>                    
                     </div>
 
                     <div className="header-actions">
                         {currentUser ? (
                             <>
                                 {/* 已登入狀態 */}
-                                <span className="user-info">
-                                    👤 {userProfile?.displayName || currentUser.email}
-                                </span>
+                                <button 
+                                    className="user-info-btn" 
+                                    onClick={handleProfileClick}
+                                    title="查看個人中心"
+                                >
+                                    {userProfile?.displayName || currentUser.email}
+                                </button>
                                 <a href="#post" className="btn-post" onClick={handlePostClick}>
                                     {showForm ? '❌ 關閉表單填寫' : '➕ 發佈走失資訊'}
                                 </a>

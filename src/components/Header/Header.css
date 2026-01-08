@@ -1,6 +1,8 @@
 /* ========== Header 基本樣式 ========== */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap");
+
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: rgba(213, 213, 213, 0.547);
     padding: 0;
     position: sticky;  /* 滾動時固定在頂部 */
     top: 0;
@@ -25,6 +27,7 @@ nav {
     color: white;
     letter-spacing: 1px;
     transition: transform 0.3s;
+    font-family: 'Gravitas One', cursive; 
 }
 
 .header-logo:hover {
@@ -41,7 +44,7 @@ nav {
 }
 
 .menu-link a {
-    color: white;
+    color: rgb(80, 80, 80);
     text-decoration: none;
     font-weight: 500;
     font-size: 16px;
@@ -63,19 +66,35 @@ nav {
 }
 
 /* 使用者資訊標籤 */
-.user-info {
+.user-info-btn {
     color: white;
     font-weight: 500;
     padding: 8px 16px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
 }
+
+.user-info-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+/* .user-info {
+    color: white;
+    font-weight: 500;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 14px;
+} */
 
 /* ========== 發布按鈕 ========== */
 .btn-post {
     background-color: white;
-    color: #667eea;
+    color: rgba(159, 159, 159, 0.895);
     padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
