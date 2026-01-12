@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
@@ -33,7 +34,7 @@ const Login = ({ onSwitchToSignup, onClose }) => {
 
         try {
             await login(formData.email, formData.password);
-            alert('✅ 登入成功！');
+            toast.success('登入成功！');
             onClose(); 
         } catch (err) {
             console.error('登入失敗:', err);

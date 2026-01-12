@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
@@ -66,7 +67,7 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
                 formData.phone
             );
             
-            alert('✅ 註冊成功！歡迎加入 PawFinder');
+            toast.success('註冊成功！歡迎加入 PawFinder');
                 if (onClose) {
                 console.log('✅ 執行 onClose');
                 onClose();

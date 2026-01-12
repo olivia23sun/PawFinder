@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, query, where, orderBy, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import toast from 'react-hot-toast';
 import './Profile.css';
 
 const Profile = ({ onEditDog, onUpdate }) => {
@@ -10,6 +11,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [filter, setFilter] = useState('all');
+    
 
     useEffect(() => {
         if (currentUser) {
@@ -69,10 +71,10 @@ const Profile = ({ onEditDog, onUpdate }) => {
                     onUpdate();
                 }
 
-                alert(newStatus === 'found' ? '✅ 已標記為「已找到」' : '✅ 已改回「尋找中」');
+                toast.success(newStatus === 'found' ? '✅ 已標記為「已找到」' : '✅ 已改回「尋找中」');
             } catch (error) {
                 console.error('❌ 更新失敗:', error);
-                alert('更新失敗，請稍後再試');
+                toast.error('更新失敗，請稍後再試');
             }
         }
     };
@@ -93,10 +95,10 @@ const Profile = ({ onEditDog, onUpdate }) => {
                 if (onUpdate) {
                     onUpdate();
                 }
-                alert('✅ 刪除成功！');
+                toast.success('✅ 刪除成功！');
             } catch (error) {
                 console.error('❌ 刪除失敗:', error);
-                alert('刪除失敗，請稍後再試');
+                toast.error('刪除失敗，請稍後再試');
             }
         }
     };

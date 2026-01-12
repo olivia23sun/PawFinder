@@ -4,12 +4,14 @@ import { db } from './firebase';
 import Header from './components/Header/Header';
 import HeroCarousel from './components/HeroCarousel/HeroCarousel';
 import FilterSection from './components/FilterSection/FilterSection';
-import './App.css';
+import './index.css';
 import DogCard from './components/DogCard/DogCard';
 import EditDogForm from './components/DogForm/EditDogForm'; 
 import AddDogForm from './components/DogForm/AddDogForm';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profile from './components/Profile/Profile';
+import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function AppContent() {
   const { currentUser } = useAuth(); 
@@ -179,7 +181,7 @@ function AppContent() {
         }, 100);
       }, 10);
     } else {
-      alert('⚠️ 您只能編輯自己發布的通報');
+      toast.error('⚠️ 您只能編輯自己發布的通報');
     }
   };
 
@@ -187,12 +189,12 @@ function AppContent() {
   const handleDelete = async (dogId, userId) => {
     // 權限檢查
     if (!currentUser) {
-      alert('⚠️ 請先登入');
+      toast.error('⚠️ 請先登入');
       return;
     }
 
     if (currentUser.uid !== userId) {
-      alert('⚠️ 您只能刪除自己發布的通報');
+      toast.error('⚠️ 您只能刪除自己發布的通報');
       return;
     }
 
@@ -201,10 +203,10 @@ function AppContent() {
       try {
         await deleteDoc(doc(db, 'lostDogs', dogId));
         await fetchDogs(); // 重新載入資料
-        alert('✅ 刪除成功！');
+        toast.success('刪除成功！');
       } catch (error) {
         console.error('❌ 刪除失敗:', error);
-        alert('刪除失敗，請稍後再試');
+        toast.error('刪除失敗，請稍後再試');
       }
     }
   };
@@ -349,6 +351,7 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
+      <Toaster position="top-center" reverseOrder={false} />
       <AppContent />
     </AuthProvider>
   );

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebase';
+import toast from 'react-hot-toast';
 import './EditDogForm.css';
 
 const EditDogForm = ({ dog, onComplete, onCancel }) => {
@@ -113,11 +114,11 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
                 foundAt: new Date()
             });
 
-            alert('✅ 已標記為尋獲！');
+            toast.success('✅ 已標記為尋獲！');
             onComplete();
         } catch (error) {
             console.error('❌ 標記失敗:', error);
-            alert('標記失敗：' + error.message);
+            toast.error('標記失敗：' + error.message);
         } finally {
             setLoading(false);
         }
@@ -155,11 +156,11 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
                 status: dog.status || 'lost'
             });
 
-            alert('更新成功！');
+            toast.success('更新成功！');
             onComplete();
         } catch (error) {
             console.error('更新失敗:', error);
-            alert('更新失敗，請稍後再試');
+            toast.error('更新失敗，請稍後再試');
         } finally {
             setLoading(false);
         }

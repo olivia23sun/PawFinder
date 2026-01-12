@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import Login from '../Auth/Login.js';
 import Signup from '../Auth/Signup.js';
+import toast from 'react-hot-toast';
 
 const Header = ({ onShowForm, showForm, onGoHome, onShowProfile, onShowAbout }) => {
     const { currentUser, userProfile, logout } = useAuth();
@@ -15,7 +16,7 @@ const Header = ({ onShowForm, showForm, onGoHome, onShowProfile, onShowAbout }) 
         
         // 檢查登入狀態
         if (!currentUser) {
-            alert('⚠️ 請先登入會員才能發布通報');
+            toast.error('⚠️ 請先登入會員才能發布通報');
             setShowLogin(true);
             return;
         }
@@ -46,11 +47,11 @@ const Header = ({ onShowForm, showForm, onGoHome, onShowProfile, onShowAbout }) 
         if (window.confirm('確定要登出嗎？')) {
             try {
                 await logout();
-                alert('✅ 已登出');
+                toast.success('✅ 已登出');
                 onGoHome();
             } catch (error) {
                 console.error('登出失敗:', error);
-                alert('❌ 登出失敗');
+                toast.error('❌ 登出失敗');
             }
         }
     };

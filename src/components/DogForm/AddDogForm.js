@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebase';
+import toast from 'react-hot-toast';
 import TAIWAN_CITIES from '../../constants/taiwanCities';
 import './AddDogForm.css';
 import { useAuth } from '../../contexts/AuthContext';
@@ -217,7 +218,7 @@ const AddDogForm = ({ onSuccess }) => {
       setImageFiles([]);
       setImagePreviews([]);
 
-      alert('✅ 通報成功！');
+      toast.success('✅ 通報成功！');
       
       // 5. 通知父組件更新列表
       if (onSuccess) {

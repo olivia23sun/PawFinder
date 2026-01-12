@@ -1,4 +1,5 @@
 import './ContactModal.css';
+import toast from 'react-hot-toast';
 
 const ContactModal = ({ dog, onClose }) => {
     if (!dog) return null;
@@ -6,7 +7,7 @@ const ContactModal = ({ dog, onClose }) => {
     // ========== 複製到剪貼簿 ==========
     const handleCopyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
-        alert('✅ 已複製到剪貼簿！');
+        toast.success('已複製到剪貼簿！');
     };
 
     // ========== 撥打電話 ==========

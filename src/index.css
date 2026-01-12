@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+.container {
+    max-width: 75rem; 
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
 /* ========== 響應式字體縮放 ========== */
 /*
 使用 rem 單位實現全站字體自動縮放
