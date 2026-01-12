@@ -165,7 +165,7 @@ const AddDogForm = ({ onSuccess }) => {
     
     // 檢查至少上傳一張圖片
     if (imageFiles.length === 0) {
-      setError('請至少上傳 1 張狗狗照片');
+      setError('請至少上傳 1 張毛孩照片');
       return false;
     }
     
@@ -234,7 +234,7 @@ const AddDogForm = ({ onSuccess }) => {
 
   return (
     <div className="form-container" id="add-dog-form">
-      <h2 className="form-title">🐕 通報走失狗狗</h2>
+      <h2 className="form-title">- 通報走失毛孩 -</h2>
 
       <form onSubmit={handleSubmit} className="form">
         

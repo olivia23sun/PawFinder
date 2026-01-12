@@ -139,13 +139,13 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                             className="btn-edit"
                             onClick={() => onEdit(dog)}
                         >
-                            ✏️ 編輯
+                            編輯
                         </button>
                         <button 
                             className="btn-delete"
                             onClick={() => onDelete(dog.id, dog.userId)}
                         >
-                            🗑️ 刪除
+                            刪除
                         </button>
                     </div>
                 )}

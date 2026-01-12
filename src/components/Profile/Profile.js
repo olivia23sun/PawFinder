@@ -4,7 +4,7 @@ import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import './Profile.css';
 
-const Profile = () => {
+const Profile = ({ onEditDog }) => {
     const { currentUser, userProfile } = useAuth();
     const [myDogs, setMyDogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -69,6 +69,12 @@ const Profile = () => {
                 console.error('❌ 更新失敗:', error);
                 alert('更新失敗，請稍後再試');
             }
+        }
+    };
+
+    const handleEdit = (dog) => {
+        if (onEditDog) {
+            onEditDog(dog);  // 調用父組件傳入的函數
         }
     };
 
@@ -185,7 +191,7 @@ const Profile = () => {
                     <div className="stat-label">總通報數</div>
                 </div>
                 <div className="stat-card">
-                    <div className="stat-number" style={{ color: '#f59e0b' }}>{stats.lost}</div>
+                    <div className="stat-number" style={{ color: 'rgb(241, 23, 52)' }}>{stats.lost}</div>
                     <div className="stat-label">尋找中</div>
                 </div>
                 <div className="stat-card">
@@ -223,7 +229,7 @@ const Profile = () => {
                 {/* 空資料判斷 */}
                 {filteredDogs.length === 0 ? (
                     <div className="profile-empty">
-                        <p>😢 尚無通報資料</p>
+                        <p>尚無通報資料</p>
                         <p style={{ fontSize: '14px', color: '#666' }}>
                             {filter !== 'all' 
                                 ? '切換到「全部」查看所有通報' 
@@ -242,7 +248,7 @@ const Profile = () => {
                                         <div className="no-image">無照片</div>
                                     )}
                                     {dog.status === 'found' && (
-                                        <div className="found-badge">✅ 已找到</div>
+                                        <div className="found-badge">已找到</div>
                                     )}
                                 </div>
 
@@ -250,15 +256,13 @@ const Profile = () => {
                                 <div className="profile-dog-info">
                                     <div className="profile-dog-header">
                                         <h4>{dog.name}</h4>
-                                        <span className={`status-badge ${dog.status}`}>
-                                            {dog.status === 'found' ? '已找到' : '尋找中'}
-                                        </span>
                                     </div>
                                     
                                     <div className="profile-dog-details">
-                                        <p>📍 {dog.location}</p>
-                                        <p>🐕 {dog.breed} · {dog.color} · {dog.gender}</p>
-                                        <p>📅 {getDaysLost(dog.createdAt) !== null ? `走失 ${getDaysLost(dog.createdAt)} 天` : '日期未知'}</p>
+                                        <p>地點｜{dog.location}</p>
+                                        <p>特徵｜{dog.breed} · {dog.color} · {dog.gender}</p>
+                                        <p>描述｜{dog.description}</p>
+                                        <p>{getDaysLost(dog.createdAt) !== null ? `走失 ${getDaysLost(dog.createdAt)} 天` : '日期未知'}</p>
                                     </div>
 
                                     {/* 操作按鈕 */}
@@ -267,11 +271,11 @@ const Profile = () => {
                                             className="action-btn status-btn"
                                             onClick={() => handleToggleStatus(dog.id, dog.status)}
                                         >
-                                            {dog.status === 'found' ? '改回尋找中' : '✅ 標記已找到'}
+                                            {dog.status === 'found' ? '改回尋找中' : '標記已找到'}
                                         </button>
                                         <button 
                                             className="action-btn edit-btn"
-                                            onClick={() => window.location.hash = `edit-${dog.id}`}
+                                            onClick={() => handleEdit(dog)}
                                         >
                                             編輯
                                         </button>

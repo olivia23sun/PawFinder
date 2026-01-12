@@ -25,7 +25,7 @@ const ContactModal = ({ dog, onClose }) => {
 
                 {/* 狗狗資訊 */}
                 <div className="dog-info-header">
-                    <img src={dog.imageUrl} alt={dog.name} />
+                    <img src={dog.imageUrls} alt={dog.name} />
                     <div>
                         <h3>{dog.name}</h3>
                         <p>📍 {dog.location}</p>
@@ -43,7 +43,7 @@ const ContactModal = ({ dog, onClose }) => {
                     
                     {dog.contactPhone && (
                         <div className="contact-item">
-                            <label>📞 聯絡電話</label>
+                            <label>聯絡電話</label>
                             <div className="contact-actions">
                                 <span className="contact-value">{dog.contactPhone}</span>
                                 <button onClick={handleCall} className="btn-call">
@@ -62,11 +62,10 @@ const ContactModal = ({ dog, onClose }) => {
 
                 {/* 安全提醒 */}
                 <div className="warning-box">
-                    <p>⚠️ 溫馨提醒</p>
+                    <p>－ 溫馨提醒 －</p>
                     <ul>
-                        <li>請確認對方身份後再提供狗狗資訊</li>
-                        <li>建議在公開場所見面</li>
-                        <li>注意自身安全</li>
+                        <p>請確認對方身份後再提供狗狗資訊</p>
+                        <p>注意自身安全，建議在公開場所見面</p>
                     </ul>
                 </div>
             </div>

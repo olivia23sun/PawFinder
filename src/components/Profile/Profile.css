@@ -8,7 +8,7 @@
 /* ========== 個人資訊卡片 ========== */
 /* 使用漸層背景提升視覺層次 */
 .profile-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgb(170, 170, 170);
     border-radius: 16px;
     padding: 40px;
     display: flex;
@@ -72,7 +72,7 @@
 .stat-number {
     font-size: 48px;
     font-weight: 700;
-    color: #667eea;
+    color: rgb(80, 80, 80);
     margin-bottom: 10px;
 }
 
@@ -94,6 +94,7 @@
     padding: 12px 24px;
     border: 2px solid #e0e0e0;
     background: white;
+    color: #333;
     border-radius: 25px;
     font-size: 15px;
     font-weight: 600;
@@ -102,13 +103,13 @@
 }
 
 .filter-btn:hover {
-    border-color: #667eea;
-    color: #667eea;
+    border-color: rgb(170, 170, 170);
+    color: rgb(170, 170, 170);
 }
 
 /* 啟用狀態：漸層背景 */
 .filter-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgb(170, 170, 170);
     color: white;
     border-color: transparent;
 }
@@ -143,8 +144,8 @@
 
 /* 固定圖片寬度 */
 .profile-dog-image {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 100%;
     position: relative;
     flex-shrink: 0;  /* 防止圖片被壓縮 */
 }
@@ -183,9 +184,10 @@
 /* Flex column 實現垂直排列 */
 .profile-dog-info {
     flex: 1;
-    padding: 20px;
+    padding: 20px 20px 20px 30px;
     display: flex;
     flex-direction: column;
+    
 }
 
 .profile-dog-header {
@@ -201,23 +203,6 @@
     color: #333;
 }
 
-/* 狀態標籤 */
-.status-badge {
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.status-badge.lost {
-    background: #fef3c7;
-    color: #f59e0b;
-}
-
-.status-badge.found {
-    background: #d1fae5;
-    color: #10b981;
-}
 
 .profile-dog-details {
     flex: 1;
@@ -225,9 +210,10 @@
 }
 
 .profile-dog-details p {
+    text-align: left;
     margin: 8px 0;
     color: #666;
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 /* ========== 操作按鈕 ========== */
@@ -235,6 +221,8 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: auto;
 }
 
 .action-btn {

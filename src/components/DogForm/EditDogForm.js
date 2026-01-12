@@ -129,7 +129,7 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         setError('');
 
         if (!formData.name.trim()) {
-            setError('❌ 請輸入狗狗名字');
+            setError('❌ 請輸入毛孩名字');
             return;
         }
         if (!formData.breed.trim()) {
@@ -175,12 +175,12 @@ return (
                 onClick={handleMarkAsFound}
                 disabled={loading}
             >
-                ✅ 標記為已尋獲
+                ✓ 標記為已尋獲
             </button>
 
             <div className="edit-form-group">
                 <label className="edit-form-label">
-                    狗狗照片 ({totalImages}/3)
+                    毛孩照片 ({totalImages}/3)
                 </label>
 
                 {existingImages.length > 0 && (
@@ -379,7 +379,7 @@ return (
                     className="btn-save"
                     disabled={loading}
                 >
-                    {loading ? '更新中...' : '💾 儲存修改'}
+                    {loading ? '更新中...' : '儲存修改'}
                 </button>
 
                 <button 
@@ -388,7 +388,7 @@ return (
                     onClick={onCancel}
                     disabled={loading}
                 >
-                    ❌ 取消
+                    取消
                 </button>
             </div>
         </form>

@@ -130,7 +130,7 @@ const FilterSection = ({ onFilterChange }) => {
                         className="reset-btn"
                         onClick={handleReset}
                     >
-                        🔄 重置篩選
+                        重置篩選
                     </button>
                 </div>
             </section>

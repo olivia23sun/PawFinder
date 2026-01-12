@@ -8,7 +8,7 @@ const HeroCarousel = () => {
                 <Carousel.Item>
                     <div className="carousel-slide">
                         <img 
-                            src="/assets/1.jpg" 
+                            src="/assets/dog.jpg" 
                             alt="第一張"
                             className="carousel-image"
                         />
@@ -18,7 +18,7 @@ const HeroCarousel = () => {
                 <Carousel.Item>
                     <div className="carousel-slide">
                         <img 
-                            src="/assets/2.jpg" 
+                            src="/assets/cat.jpg" 
                             alt="第二張"
                             className="carousel-image"
                         />
@@ -28,7 +28,7 @@ const HeroCarousel = () => {
                 <Carousel.Item>
                     <div className="carousel-slide">
                         <img 
-                            src="/assets/3.jpg" 
+                            src="/assets/mouse.jpg" 
                             alt="第三張"
                             className="carousel-image"
                         />

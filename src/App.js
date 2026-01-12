@@ -13,7 +13,8 @@ import Profile from './components/Profile/Profile';
 
 function AppContent() {
   const { currentUser } = useAuth(); 
-  
+  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+
   // ========== State 管理 ==========
   const [dogs, setDogs] = useState([]);              // 所有狗狗資料
   const [filteredDogs, setFilteredDogs] = useState([]); // 篩選後的資料
@@ -147,10 +148,11 @@ function AppContent() {
 
     // 延遲滾動，等表單渲染完成
     setTimeout(() => {
-      document.getElementById('add-dog-form')?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      const formElement = document.getElementById('add-dog-form');
+      if (formElement) {
+        const y = formElement.offsetTop - headerHeight;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }, 100);
   };
 
@@ -171,7 +173,8 @@ function AppContent() {
         setTimeout(() => {
           const formElement = document.getElementById('edit-dog-form');
           if (formElement) {
-            formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const y = formElement.offsetTop - headerHeight;
+            window.scrollTo({ top: y, behavior: 'smooth' });
           }
         }, 100);
       }, 10);
@@ -239,7 +242,7 @@ function AppContent() {
         onShowProfile={handleShowProfile}
       />
 
-{currentPage === 'profile' && <Profile />}
+{currentPage === 'profile' && <Profile onEditDog={handleEdit} />}
 {currentPage === 'home' && (
         <>
           <HeroCarousel />

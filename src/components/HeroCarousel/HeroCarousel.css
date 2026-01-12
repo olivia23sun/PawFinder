@@ -8,7 +8,7 @@
     position: relative;
     width: 100%;
     height: 500px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgb(221, 221, 221);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,12 +81,8 @@
 
 /* 平板尺寸 (768px - 1024px) */
 @media (max-width: 1024px) {
-    .hero-carousel-wrapper {
-        margin-top: 65px;
-    }
-    
     .carousel-slide {
-        height: 350px;
+        height: 438px;
     }
     
     .hero-carousel-wrapper .carousel-control-prev,
@@ -106,12 +102,8 @@
 
 /* 小平板 / 大手機 (481px - 768px) */
 @media (max-width: 768px) {
-    .hero-carousel-wrapper {
-        margin-top: 60px;
-    }
-    
     .carousel-slide {
-        height: 280px;
+        height: 350px;
     }
     
     /* 縮小左右箭頭 */
@@ -153,12 +145,8 @@
 
 /* 手機直向 (最大 480px) */
 @media (max-width: 480px) {
-    .hero-carousel-wrapper {
-        margin-top: 0; /* 緊貼 Header */
-    }
-    
     .carousel-slide {
-        height: 220px;
+        height: 275px;
     }
     
     /* 進一步縮小箭頭 */
@@ -202,7 +190,7 @@
 /* 超小手機 (最大 360px) */
 @media (max-width: 360px) {
     .carousel-slide {
-        height: 180px;
+        height: 225px;
     }
     
     /* 箭頭再縮小 */
