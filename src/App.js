@@ -233,6 +233,10 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleProfileUpdate = () => {
+    fetchDogs();
+  };
+
   return (
     <div className="App">
       <Header 
@@ -242,7 +246,12 @@ function AppContent() {
         onShowProfile={handleShowProfile}
       />
 
-{currentPage === 'profile' && <Profile onEditDog={handleEdit} />}
+{currentPage === 'profile' && (
+        <Profile 
+          onEditDog={handleEdit} 
+          onUpdate={handleProfileUpdate}
+        />
+      )}
 {currentPage === 'home' && (
         <>
           <HeroCarousel />

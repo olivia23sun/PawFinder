@@ -4,7 +4,7 @@ import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import './Profile.css';
 
-const Profile = ({ onEditDog }) => {
+const Profile = ({ onEditDog, onUpdate }) => {
     const { currentUser, userProfile } = useAuth();
     const [myDogs, setMyDogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -63,7 +63,12 @@ const Profile = ({ onEditDog }) => {
                 setMyDogs(prev => prev.map(dog => 
                     dog.id === dogId ? { ...dog, status: newStatus } : dog
                 ));
+
                 
+                if (onUpdate) {
+                    onUpdate();
+                }
+
                 alert(newStatus === 'found' ? '✅ 已標記為「已找到」' : '✅ 已改回「尋找中」');
             } catch (error) {
                 console.error('❌ 更新失敗:', error);
@@ -84,6 +89,10 @@ const Profile = ({ onEditDog }) => {
                 await deleteDoc(doc(db, 'lostDogs', dogId));
                 // 更新本地狀態，避免重新查詢
                 setMyDogs(prev => prev.filter(dog => dog.id !== dogId));
+
+                if (onUpdate) {
+                    onUpdate();
+                }
                 alert('✅ 刪除成功！');
             } catch (error) {
                 console.error('❌ 刪除失敗:', error);
