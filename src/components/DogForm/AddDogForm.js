@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import TAIWAN_CITIES from '../../constants/taiwanCities';
 import './AddDogForm.css';
 import { useAuth } from '../../contexts/AuthContext';
+import DOG_STATUS from '../../constants/status';
 
 const AddDogForm = ({ onSuccess }) => {
   const { currentUser, userProfile } = useAuth();
@@ -193,7 +194,7 @@ const AddDogForm = ({ onSuccess }) => {
         ...formData,
         imageUrls,  // 圖片網址陣列
         createdAt: Timestamp.now(),  // 建立時間戳記
-        status: 'lost',  // 預設狀態
+        status: DOG_STATUS.LOST,  // 預設狀態
         userId: currentUser.uid,  // 紀錄發布者ID
         userEmail: currentUser.email  // 紀錄發布者Email
       };

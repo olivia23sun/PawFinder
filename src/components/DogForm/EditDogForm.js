@@ -3,6 +3,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebase';
 import toast from 'react-hot-toast';
+import DOG_STATUS from '../../constants/status';
 import './EditDogForm.css';
 
 const EditDogForm = ({ dog, onComplete, onCancel }) => {
@@ -110,7 +111,7 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         try {
             const dogRef = doc(db, 'lostDogs', dog.id);
             await updateDoc(dogRef, {
-                status: 'found',
+                status: DOG_STATUS.FOUND,
                 foundAt: new Date()
             });
 
@@ -153,7 +154,7 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
                 imageUrls: allImageUrls,
                 userId: dog.userId,
                 userEmail: dog.userEmail,
-                status: dog.status || 'lost'
+                status: dog.status || DOG_STATUS.LOST
             });
 
             toast.success('更新成功！');

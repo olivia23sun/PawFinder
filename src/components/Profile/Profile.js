@@ -3,6 +3,7 @@ import { collection, query, where, orderBy, getDocs, deleteDoc, doc, updateDoc }
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import DOG_STATUS from '../../constants/status';
 import './Profile.css';
 
 const Profile = ({ onEditDog, onUpdate }) => {
@@ -50,8 +51,8 @@ const Profile = ({ onEditDog, onUpdate }) => {
 
     // 切換狀態：「已找到」⇄「尋找中」
     const handleToggleStatus = async (dogId, currentStatus) => {
-        const newStatus = currentStatus === 'found' ? 'lost' : 'found';
-        const confirmMsg = newStatus === 'found' 
+        const newStatus = currentStatus === DOG_STATUS.FOUND ? DOG_STATUS.LOST : DOG_STATUS.FOUND;
+        const confirmMsg = newStatus === DOG_STATUS.FOUND
             ? '確定要標記為「已找到」嗎？' 
             : '確定要改回「尋找中」嗎？';
         
@@ -71,7 +72,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
                     onUpdate();
                 }
 
-                toast.success(newStatus === 'found' ? '✅ 已標記為「已找到」' : '✅ 已改回「尋找中」');
+                toast.success(newStatus === DOG_STATUS.FOUND ? '已標記為「已找到」' : '已改回「尋找中」');
             } catch (error) {
                 console.error('❌ 更新失敗:', error);
                 toast.error('更新失敗，請稍後再試');
@@ -106,8 +107,8 @@ const Profile = ({ onEditDog, onUpdate }) => {
     // 統計資訊
     const stats = {
         total: myDogs.length,
-        lost: myDogs.filter(dog => dog.status === 'lost').length,
-        found: myDogs.filter(dog => dog.status === 'found').length
+        lost: myDogs.filter(dog => dog.status === DOG_STATUS.LOST).length,
+        found: myDogs.filter(dog => dog.status === DOG_STATUS.FOUND).length
     };
 
     // 前端篩選（Firestore 對多條件查詢有限制）
@@ -220,14 +221,14 @@ const Profile = ({ onEditDog, onUpdate }) => {
                     全部 ({stats.total})
                 </button>
                 <button 
-                    className={`filter-btn ${filter === 'lost' ? 'active' : ''}`}
-                    onClick={() => setFilter('lost')}
+                    className={`filter-btn ${filter === DOG_STATUS.LOST ? 'active' : ''}`}
+                    onClick={() => setFilter(DOG_STATUS.LOST)}
                 >
                     尋找中 ({stats.lost})
                 </button>
                 <button 
-                    className={`filter-btn ${filter === 'found' ? 'active' : ''}`}
-                    onClick={() => setFilter('found')}
+                    className={`filter-btn ${filter === DOG_STATUS.FOUND ? 'active' : ''}`}
+                    onClick={() => setFilter(DOG_STATUS.FOUND)}
                 >
                     已找到 ({stats.found})
                 </button>
@@ -282,7 +283,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
                                             className="action-btn status-btn"
                                             onClick={() => handleToggleStatus(dog.id, dog.status)}
                                         >
-                                            {dog.status === 'found' ? '改回尋找中' : '標記已找到'}
+                                            {dog.status === DOG_STATUS.FOUND ? '改回尋找中' : '標記已找到'}
                                         </button>
                                         <button 
                                             className="action-btn edit-btn"

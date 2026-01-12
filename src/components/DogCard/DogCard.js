@@ -1,4 +1,5 @@
 import './DogCard.css';
+import DOG_STATUS from '../../constants/status';
 import { useState } from 'react';
 import ContactModal from '../ContactModal/ContactModal';
 
@@ -39,7 +40,7 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
         <>
             <div className="dog-card">
                 {/* ========== 已尋獲遮罩 ========== */}
-                {dog.status === 'found' && (
+                {dog.status === DOG_STATUS.FOUND && (
                     <div className="found-overlay">
                         <div className="found-badge">
                             已尋獲
