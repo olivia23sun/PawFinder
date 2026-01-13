@@ -36,7 +36,9 @@
 - **Responsive Design**：使用 CSS3 Flexbox/Grid 結合 Bootstrap，確保飼主在戶外使用手機時能有流暢的通報體驗。
 
 ### 後端服務(Firebase Serverless)
-- **Cloud Firestore**：選擇 NoSQL 架構以因應欄位彈性需求（如：擴充「毛孩特徵」或「留言回報」等動態欄位），避免頻繁 schema 調整造成的開發成本。
+- **Cloud Firestore**：選擇 NoSQL 架構以因應欄位彈性需求。
+  - **擴展性說明**：目前代碼中保留部分 `dog` 命名（如 `DogCard`），是因為初期以狗狗協尋為開發場景。
+  - **通用設計**：底層資料結構與前端 Props 邏輯均採通用設計，僅需新增 `petType` 標籤就可以擴展至貓、兔等各類寵物。
 - **Firebase Storage**：存放高解析度走失照片，並實作非同步上傳流程。
 - **Security Rules**：透過後端規則定義資料存取權限，確保僅發布者本人具備修改權限。
 ```
