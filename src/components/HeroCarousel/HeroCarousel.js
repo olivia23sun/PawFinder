@@ -11,6 +11,7 @@ const HeroCarousel = () => {
                             src="/assets/banner-dog.jpg" 
                             alt="第一張"
                             className="carousel-image"
+                            loading="lazy"
                         />
                     </div>
                 </Carousel.Item>
@@ -21,6 +22,7 @@ const HeroCarousel = () => {
                             src="/assets/banner-cat.jpg" 
                             alt="第二張"
                             className="carousel-image"
+                            loading="lazy"
                         />
                     </div>
                 </Carousel.Item>
@@ -31,6 +33,7 @@ const HeroCarousel = () => {
                             src="/assets/banner-mouse.jpg" 
                             alt="第三張"
                             className="carousel-image"
+                            loading="lazy"
                         />
                     </div>
                 </Carousel.Item>

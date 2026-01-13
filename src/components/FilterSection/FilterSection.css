@@ -1,6 +1,6 @@
 /* ========== 容器設定 ========== */
 .container {
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 2rem auto;
     padding: 0 2rem;
 }
@@ -9,8 +9,8 @@
 .filter-section {
     background-color: white;
     padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem 1.25rem rgba(0, 0, 0, 0.1);
     margin: 2rem 0;
 }
 
@@ -21,10 +21,10 @@
 }
 
 /* ========== 篩選器佈局 ========== */
-/* Grid 自動填充，每個篩選器最小 200px */
+/* Grid 自動填充，每個篩選器最小 12.5rem */
 .filters {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
     gap: 1rem;
 }
 
@@ -45,7 +45,7 @@
 .filter-group input {
     padding: 0.7rem;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 1rem;
     transition: border-color 0.3s;
 }
@@ -59,17 +59,17 @@
 
 /* ========== 重置按鈕 ========== */
 .reset-btn {
-    margin-top: 25px;
-    padding: 10px 20px;
+    margin-top: 1.56rem;
+    padding: 0.625rem 1.25rem;
     background-color: rgb(170, 170, 170);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 0.25rem 0.38rem rgba(102, 126, 234, 0.3);
     width: 100%;
     
     /* Grid 中佔滿整行 */
@@ -77,12 +77,12 @@
     
     /* 內容置中 */
     justify-self: center;
-    max-width: 300px;
+    max-width: 18.75rem;
 }
 
 .reset-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 0.75rem rgba(102, 126, 234, 0.4);
     background-color: rgba(50, 50, 50, 0.547);
 }
 
@@ -139,7 +139,7 @@
     
     /* 重置按鈕佔滿兩欄 */
     .reset-btn {
-        margin-top: 15px;
+        margin-top: 1rem;
         max-width: 100%;
     }
 }
@@ -153,7 +153,7 @@
     .filter-section {
         padding: 1.2rem;
         margin: 1rem 0;
-        border-radius: 12px;
+        border-radius: 0.75rem;
     }
     
     .filter-title {
@@ -181,13 +181,13 @@
     .filter-group input {
         padding: 0.75rem;
         font-size: 1rem;
-        border-width: 1px;
+        border-width: 0.0625rem;
     }
     
     /* 重置按鈕調整 */
     .reset-btn {
-        margin-top: 10px;
-        padding: 12px;
+        margin-top: 0.625rem;
+        padding: 0.75rem;
         font-size: 1rem;
         max-width: 100%;
     }
@@ -214,7 +214,7 @@
     }
     
     .reset-btn {
-        padding: 10px;
+        padding: 0.625rem;
         font-size: 0.95rem;
     }
 }
@@ -232,8 +232,8 @@
         /* 自訂下拉箭頭 */
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 12px center;
-        padding-right: 35px;
+        background-position: right 0.75rem center;
+        padding-right: 2.2rem;
     }
     
     /* input 不需要箭頭 */
@@ -244,6 +244,6 @@
     
     /* 按鈕觸控優化 */
     .reset-btn {
-        min-height: 44px; /* iOS 建議最小觸控尺寸 */
+        min-height: 2.75rem; /* iOS 建議最小觸控尺寸 */
     }
 }

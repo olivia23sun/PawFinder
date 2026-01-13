@@ -187,7 +187,7 @@ return (
 
                 {existingImages.length > 0 && (
                     <div>
-                        <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                        <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '0.625rem' }}>
                             現有照片：
                         </p>
                         <div className="edit-form-previews">
@@ -197,6 +197,7 @@ return (
                                         src={url} 
                                         alt={`現有照片 ${index + 1}`} 
                                         className="edit-form-preview" 
+                                        loading="lazy"
                                     />
                                     <button
                                         type="button"
@@ -212,8 +213,8 @@ return (
                 )}
 
                 {newImagePreviews.length > 0 && (
-                    <div style={{ marginTop: '15px' }}>
-                        <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                    <div style={{ marginTop: '1rem' }}>
+                        <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '0.625rem' }}>
                             新增照片：
                         </p>
                         <div className="edit-form-previews">
@@ -222,7 +223,8 @@ return (
                                     <img 
                                         src={preview} 
                                         alt={`新增照片 ${index + 1}`} 
-                                        className="edit-form-preview" 
+                                        className="edit-form-preview"
+                                        loading="lazy" 
                                     />
                                     <button
                                         type="button"
@@ -244,7 +246,7 @@ return (
                         multiple
                         onChange={handleImageChange}
                         className="edit-form-file-input"
-                        style={{ marginTop: '15px' }}
+                        style={{ marginTop: '1rem' }}
                     />
                 )}
             </div>

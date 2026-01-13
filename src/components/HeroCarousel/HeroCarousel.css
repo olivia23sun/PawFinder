@@ -7,7 +7,7 @@
 .carousel-slide {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 31.25rem;
     background: rgb(221, 221, 221);
     display: flex;
     align-items: center;
@@ -25,30 +25,30 @@
 
 /* 指示器樣式優化 */
 .hero-carousel-wrapper .carousel-indicators {
-    bottom: 20px;
+    bottom: 1.25rem;
 }
 
 .hero-carousel-wrapper .carousel-indicators [data-bs-target] {
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
     border-radius: 50%;
-    margin: 0 6px;
+    margin: 0 0.38rem;
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
     transition: all 0.3s;
 }
 
 .hero-carousel-wrapper .carousel-indicators .active {
-    width: 30px;
-    border-radius: 6px;
+    width: 1.87rem;
+    border-radius: 0.375rem;
     background-color: white;
 }
 
 /* 左右箭頭樣式優化 */
 .hero-carousel-wrapper .carousel-control-prev,
 .hero-carousel-wrapper .carousel-control-next {
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.4);
@@ -58,11 +58,11 @@
 }
 
 .hero-carousel-wrapper .carousel-control-prev {
-    left: 20px;
+    left: 1.25rem;
 }
 
 .hero-carousel-wrapper .carousel-control-next {
-    right: 20px;
+    right: 1.25rem;
 }
 
 .hero-carousel-wrapper .carousel-control-prev:hover,
@@ -73,8 +73,8 @@
 
 .hero-carousel-wrapper .carousel-control-prev-icon,
 .hero-carousel-wrapper .carousel-control-next-icon {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 /* ========== RWD 響應式設計 ========== */
@@ -82,147 +82,147 @@
 /* 平板尺寸 (768px - 1024px) */
 @media (max-width: 1024px) {
     .carousel-slide {
-        height: 438px;
+        height: 27.3rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev,
     .hero-carousel-wrapper .carousel-control-next {
-        width: 45px;
-        height: 45px;
+        width: 2.8rem;
+        height: 2.8rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev {
-        left: 15px;
+        left: 1rem;
     }
     
     .hero-carousel-wrapper .carousel-control-next {
-        right: 15px;
+        right: 1rem;
     }
 }
 
 /* 小平板 / 大手機 (481px - 768px) */
 @media (max-width: 768px) {
     .carousel-slide {
-        height: 350px;
+        height: 21.8rem;
     }
     
     /* 縮小左右箭頭 */
     .hero-carousel-wrapper .carousel-control-prev,
     .hero-carousel-wrapper .carousel-control-next {
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;
+        height: 2.5rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev {
-        left: 10px;
+        left: 0.625rem;
     }
     
     .hero-carousel-wrapper .carousel-control-next {
-        right: 10px;
+        right: 0.625rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev-icon,
     .hero-carousel-wrapper .carousel-control-next-icon {
-        width: 20px;
-        height: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
     }
     
     /* 指示器調整 */
     .hero-carousel-wrapper .carousel-indicators {
-        bottom: 15px;
+        bottom: 1rem;
     }
     
     .hero-carousel-wrapper .carousel-indicators [data-bs-target] {
-        width: 10px;
-        height: 10px;
-        margin: 0 4px;
+        width: 0.625rem;
+        height: 0.625rem;
+        margin: 0 0.25rem;
     }
     
     .hero-carousel-wrapper .carousel-indicators .active {
-        width: 24px;
+        width: 1.5rem;
     }
 }
 
 /* 手機直向 (最大 480px) */
 @media (max-width: 480px) {
     .carousel-slide {
-        height: 275px;
+        height: 17.2rem;
     }
     
     /* 進一步縮小箭頭 */
     .hero-carousel-wrapper .carousel-control-prev,
     .hero-carousel-wrapper .carousel-control-next {
-        width: 35px;
-        height: 35px;
+        width: 2.19rem;
+        height: 2.19rem;
         background: rgba(0, 0, 0, 0.5);
     }
     
     .hero-carousel-wrapper .carousel-control-prev {
-        left: 8px;
+        left: 0.5rem;
     }
     
     .hero-carousel-wrapper .carousel-control-next {
-        right: 8px;
+        right: 0.5rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev-icon,
     .hero-carousel-wrapper .carousel-control-next-icon {
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
     }
     
     /* 指示器調整 */
     .hero-carousel-wrapper .carousel-indicators {
-        bottom: 10px;
+        bottom: 0.625rem;
     }
     
     .hero-carousel-wrapper .carousel-indicators [data-bs-target] {
-        width: 8px;
-        height: 8px;
-        margin: 0 3px;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin: 0 0.2rem;
     }
     
     .hero-carousel-wrapper .carousel-indicators .active {
-        width: 20px;
+        width: 1.25rem;
     }
 }
 
 /* 超小手機 (最大 360px) */
 @media (max-width: 360px) {
     .carousel-slide {
-        height: 225px;
+        height: 14rem;
     }
     
     /* 箭頭再縮小 */
     .hero-carousel-wrapper .carousel-control-prev,
     .hero-carousel-wrapper .carousel-control-next {
-        width: 30px;
-        height: 30px;
+        width: 1.87rem;
+        height: 1.87rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev {
-        left: 5px;
+        left: 0.3rem;
     }
     
     .hero-carousel-wrapper .carousel-control-next {
-        right: 5px;
+        right: 0.3rem;
     }
     
     .hero-carousel-wrapper .carousel-control-prev-icon,
     .hero-carousel-wrapper .carousel-control-next-icon {
-        width: 16px;
-        height: 16px;
+        width: 1rem;
+        height: 1rem;
     }
     
     /* 指示器縮小 */
     .hero-carousel-wrapper .carousel-indicators [data-bs-target] {
-        width: 6px;
-        height: 6px;
-        margin: 0 2px;
+        width: 0.38rem;
+        height: 0.38rem;
+        margin: 0 0.125rem;
     }
     
     .hero-carousel-wrapper .carousel-indicators .active {
-        width: 16px;
+        width: 1rem;
     }
 }
 
@@ -232,7 +232,7 @@
     .hero-carousel-wrapper .carousel-control-prev,
     .hero-carousel-wrapper .carousel-control-next {
         /* 實際觸控區域比視覺大 */
-        padding: 10px;
+        padding: 0.625rem;
     }
     
     /* 取消懸停效果（手機不適用）*/

@@ -64,7 +64,7 @@ const Login = ({ onSwitchToSignup, onClose }) => {
             <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
                 <button className="auth-modal-close" onClick={onClose}>✕</button>
                 
-                <h2 className="auth-title">🐾 會員登入</h2>
+                <h2 className="auth-title">會員登入</h2>
                 
                 {error && <div className="auth-error">{error}</div>}
 

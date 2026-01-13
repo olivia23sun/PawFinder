@@ -144,7 +144,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
     if (loading) {
         return (
             <div className="profile-container">
-                <p style={{ textAlign: 'center', padding: '40px' }}>載入中...</p>
+                <p style={{ textAlign: 'center', padding: '2.5rem' }}>載入中...</p>
             </div>
         );
     }
@@ -154,23 +154,23 @@ const Profile = ({ onEditDog, onUpdate }) => {
         return (
             <div className="profile-container">
                 <div style={{
-                    padding: '20px',
+                    padding: '1.25rem',
                     background: '#fee',
                     color: '#c33',
-                    borderRadius: '8px',
-                    margin: '20px 0',
+                    borderRadius: '0.5rem',
+                    margin: '1.25rem 0',
                     textAlign: 'center',
                     border: '1px solid #fcc'
                 }}>
-                    <p style={{ margin: '0 0 10px 0' }}>{error}</p>
+                    <p style={{ margin: '0 0 0.625rem 0' }}>{error}</p>
                     <button 
                         onClick={fetchMyDogs}
                         style={{
-                            padding: '8px 16px',
+                            padding: '0.5rem 1rem',
                             background: '#c33',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
+                            borderRadius: '0.25rem',
                             cursor: 'pointer'
                         }}
                     >
@@ -242,7 +242,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
                 {filteredDogs.length === 0 ? (
                     <div className="profile-empty">
                         <p>尚無通報資料</p>
-                        <p style={{ fontSize: '14px', color: '#666' }}>
+                        <p style={{ fontSize: '0.875rem', color: '#666' }}>
                             {filter !== 'all' 
                                 ? '切換到「全部」查看所有通報' 
                                 : '點選上方「發佈走失資訊」開始通報'}
@@ -255,7 +255,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
                                 {/* 圖片 */}
                                 <div className="profile-dog-image">
                                     {dog.imageUrls && dog.imageUrls.length > 0 ? (
-                                        <img src={dog.imageUrls[0]} alt={dog.name} />
+                                        <img src={dog.imageUrls[0]} alt={dog.name} loading="lazy"/>
                                     ) : (
                                         <div className="no-image">無照片</div>
                                     )}

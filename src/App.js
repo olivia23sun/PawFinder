@@ -263,23 +263,23 @@ function AppContent() {
             {/* 錯誤訊息顯示 */}
             {error && (
               <div style={{
-                padding: '20px',
+                padding: '1.25rem',
                 background: '#fee',
                 color: '#c33',
-                borderRadius: '8px',
-                margin: '20px 0',
+                borderRadius: '0.5rem',
+                margin: '1.25rem 0',
                 textAlign: 'center',
                 border: '1px solid #fcc'
               }}>
-                <p style={{ margin: '0 0 10px 0' }}>{error}</p>
+                <p style={{ margin: '0 0 0.625rem 0' }}>{error}</p>
                 <button 
                   onClick={fetchDogs}
                   style={{
-                    padding: '8px 16px',
+                    padding: '0.5rem 1rem',
                     background: '#c33',
                     color: 'white',
                     border: 'none',
-                    borderRadius: '4px',
+                    borderRadius: '0.25rem',
                     cursor: 'pointer'
                   }}
                 >
@@ -306,22 +306,22 @@ function AppContent() {
             
             {/* 載入狀態 or 卡片列表 */}
             {loading ? (
-              <p style={{ textAlign: 'center', padding: '40px' }}>載入中...</p>
+              <p style={{ textAlign: 'center', padding: '2.5rem' }}>載入中...</p>
             ) : (
               <>
                 <p style={{ 
                   textAlign: 'center', 
-                  fontSize: '18px', 
+                  fontSize: '1.12rem', 
                   color: '#666',
-                  marginBottom: '20px',
+                  marginBottom: '1.25rem',
                   fontWeight: '500'
                 }}>
-                  顯示 <strong style={{ color: 'rgb(80,80,80)',fontSize: '30px' }}>{filteredDogs.length}</strong> 隻毛孩
+                  顯示 <strong style={{ color: 'rgb(80,80,80)',fontSize: '1.87rem' }}>{filteredDogs.length}</strong> 隻毛孩
                 </p>
               
                 <section className="cards-grid">
                   {filteredDogs.length === 0 ? (
-                    <p style={{ textAlign: 'center', padding: '40px' }}>
+                    <p style={{ textAlign: 'center', padding: '2.5rem' }}>
                       {dogs.length === 0 
                         ? '目前沒有走失毛孩資料'
                         : '沒有符合條件的毛孩 😢'}

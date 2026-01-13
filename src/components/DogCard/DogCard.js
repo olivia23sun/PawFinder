@@ -52,8 +52,9 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                 <div className="card-image-wrapper">
                     <img 
                         src={images[currentImageIndex]} 
-                        alt={dog.name} 
+                        alt={dog.name}
                         className="card-image"
+                        loading="lazy"
                     />
                     
                     {/* 多張圖片時顯示左右切換按鈕 */}
@@ -62,12 +63,14 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                             <button 
                                 className="carousel-btn carousel-btn-prev" 
                                 onClick={handlePrevImage}
+                                aria-label="上一張照片"
                             >
                                 ‹
                             </button>
                             <button 
                                 className="carousel-btn carousel-btn-next" 
                                 onClick={handleNextImage}
+                                aria-label="下一張照片"
                             >
                                 ›
                             </button>

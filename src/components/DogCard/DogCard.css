@@ -1,6 +1,6 @@
 /* ========== 容器設定 ========== */
 .container{
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 2rem auto;
     padding:  0 2rem;
 }
@@ -9,7 +9,7 @@
 /* 使用 Grid 實現響應式卡片佈局 */
 .cards-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(18.75rem,1fr));
     gap: 2rem;
 }
 
@@ -17,23 +17,23 @@
 .dog-card{
     position: relative;  /* 為已找到遮罩提供定位基準 */
     background-color: white;
-    border-radius: 15px;
+    border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 031rem 1.25rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
     cursor: pointer;
 }
 
 .dog-card:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.625rem);
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
 }
 
 /* ========== 圖片區域 ========== */
 .card-image-wrapper {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 15.62rem;
     overflow: hidden;
     background: #f5f5f5;
 }
@@ -50,14 +50,14 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,27 +77,27 @@
 }
 
 .carousel-btn-prev {
-    left: 10px;
+    left: 0.625rem;
 }
 
 .carousel-btn-next {
-    right: 10px;
+    right: 0.625rem;
 }
 
 /* ========== 圖片指示器 ========== */
 .carousel-indicators {
     position: absolute;
-    bottom: 10px;
+    bottom: 0.625rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 6px;
+    gap: 0.375rem;
     z-index: 5;
 }
 
 .indicator {
-    width: 8px;
-    height: 8px;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     border: none;
@@ -106,8 +106,8 @@
 }
 
 .indicator.active {
-    width: 24px;
-    border-radius: 4px;
+    width: 1.5rem;
+    border-radius: 0.25rem;
     background: white;
 }
 
@@ -118,17 +118,17 @@
 /* ========== 走失天數標籤 ========== */
 .dog-card-days-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.625rem;
+    right: 0.625rem;
     background: rgb(170, 170, 170);
     border: solid white;
     color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 0.375rem 0.75rem;
+    border-radius: 1.25rem;
+    font-size: 0.75rem;
     font-weight: 600;
     z-index: 6;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 .card-content{
@@ -163,7 +163,7 @@
 .badge {
     display: inline-block;
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    border-radius: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
 }
@@ -209,7 +209,7 @@
     background-color: rgb(170, 170, 170);
     color: white;
     padding: 0.5rem 1.2rem;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 600;
@@ -218,14 +218,14 @@
 
 .contact-btn:hover {
     background-color: rgba(50, 50, 50, 0.547);
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
 }
 
 /* ========== 編輯/刪除按鈕區 ========== */
 .card-actions {
     display: flex;
-    gap: 10px;
-    padding: 15px;
+    gap: 0.625rem;
+    padding: 1rem;
     border-top: 1px solid #eee;
     background-color: #fafafa;
 }
@@ -233,9 +233,9 @@
 .btn-edit,
 .btn-delete {
     flex: 1;
-    padding: 10px 16px;
+    padding: 0.625rem 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -243,29 +243,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 0.375rem;
 }
 
 .btn-edit {
     background: rgb(76, 102, 216);
     color: white;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 0.125rem 0.5rem rgba(102, 126, 234, 0.3);
 }
 
 .btn-edit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(102, 126, 234, 0.4);
 }
 
 .btn-delete {
     background: rgb(241, 23, 52);
     color: white;
-    box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+    box-shadow: 0 0.125rem 0.5rem rgba(245, 87, 108, 0.3);
 }
 
 .btn-delete:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(245, 87, 108, 0.4);
 }
 
 .btn-edit:active,
@@ -286,20 +286,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(2px);  /* 背景模糊效果 */
+    backdrop-filter: blur(0.125rem);  /* 背景模糊效果 */
 }
 
 .found-overlay .found-badge {
     background: linear-gradient(135deg, #10b981 0%, #059669 50%);
     color: rgb(246, 246, 246);
-    padding: 35px 70px;
-    border-radius: 25px;
+    padding: 2.2rem 4.4rem;
+    border-radius: 1.56rem;
     font-size: 3rem;
     font-weight: 700;
-    box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 1rem 2.5rem rgba(16, 185, 129, 0.5);
     transform: rotate(-8deg);  /* 歪斜效果 */
     text-align: center;
-    letter-spacing: 3px;
+    letter-spacing: 0.19rem;
     position: relative;
 }
 
@@ -312,7 +312,7 @@
     }
     
     .cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
         gap: 1.5rem;
     }
 }
@@ -332,7 +332,7 @@
     
     /* 縮小圖片高度 */
     .card-image-wrapper {
-        height: 180px;
+        height: 11.25rem;
     }
     
     /* 縮小內容區 padding */
@@ -362,7 +362,7 @@
     .card-footer {
         padding: 0.8rem 1rem;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
         align-items: stretch;
     }
     
@@ -380,32 +380,32 @@
     /* 按鈕區改為垂直排列 */
     .card-actions {
         flex-direction: column;
-        padding: 12px;
+        padding: 0.75rem;
     }
     
     .btn-edit,
     .btn-delete {
         width: 100%;
-        padding: 12px;
+        padding: 0.75rem;
         font-size: 0.9rem;
     }
     
     /* 走失天數標籤調整 */
     .dog-card-days-badge {
-        padding: 4px 8px;
-        font-size: 10px;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.625rem;
     }
     
     /* 輪播按鈕縮小 */
     .carousel-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.25rem;
     }
     
     /* 已找到標籤縮小 */ 
     .found-badge { 
-        padding: 15px 30px; 
+        padding: 1rem 1.88rem; 
         font-size: 1.5rem; 
     }
 
@@ -429,23 +429,23 @@
     
     /* 圖片恢復較大高度（單欄時有空間）*/
     .card-image-wrapper {
-        height: 220px;
+        height: 13.75rem;
     }
     
     /* 輪播按鈕縮小 */
     .carousel-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.25rem;
         opacity: 0.8; /* 手機上預設顯示 */
     }
     
     .carousel-btn-prev {
-        left: 8px;
+        left: 0.5rem;
     }
     
     .carousel-btn-next {
-        right: 8px;
+        right: 0.5rem;
     }
     
     /* 資訊項目改為垂直排列 */
@@ -455,17 +455,17 @@
     
     /* 輪播指示器調整 */
     .carousel-indicators {
-        bottom: 8px;
-        gap: 6px;
+        bottom: 0.5rem;
+        gap: 0.375rem;
     }
     
     .indicator {
-        width: 6px;
-        height: 6px;
+        width: 0.375rem;
+        height: 0.375rem;
     }
     
     .indicator.active {
-        width: 18px;
+        width: 10.5rem;
     }
 }
 

@@ -260,6 +260,7 @@ const AddDogForm = ({ onSuccess }) => {
                     src={preview} 
                     alt={`預覽 ${index + 1}`} 
                     className="form-preview" 
+                    loading="lazy"
                   />
                   <button
                     type="button"

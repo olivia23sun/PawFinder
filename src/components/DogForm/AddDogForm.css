@@ -1,26 +1,26 @@
 /* ========== 表單容器 ========== */
 .form-container {
-    max-width: 800px;
+    max-width: 50rem;
     margin: 0 auto;
-    padding: 20px;
+    padding: 1.25rem;
     background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .form-title {
     text-align: center;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 1.8rem;
 }
 
 /* ========== 錯誤訊息 ========== */
 .form-error {
     background-color: #fee;
     color: #c33;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.25rem;
     border: 1px solid #fcc;
 }
 
@@ -28,34 +28,34 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 /* Grid 佈局實現左右兩欄 */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .form-label {
     font-weight: 600;
     color: #555;
-    font-size: 14px;
+    font-size: 0.87rem;
 }
 
 /* ========== 輸入欄位 ========== */
 .form-input {
-    padding: 12px;
+    padding: 0.75rem;
     border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 0.5rem;
+    font-size: 0.87rem;
     transition: border-color 0.3s;
     outline: none;
 }
@@ -68,7 +68,7 @@
 .form-select {
     padding: 0.7rem;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 1rem;
     transition: border-color 0.3s;
 }
@@ -79,10 +79,10 @@
 }
 
 .form-textarea {
-    padding: 12px;
+    padding: 0.75rem;
     border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 0.5rem;
+    font-size: 0.87rem;
     font-family: inherit;  /* 繼承父元素字體，避免系統預設 */
     resize: vertical;  /* 只允許垂直調整大小 */
     outline: none;
@@ -95,36 +95,36 @@
 /* ========== 檔案上傳 ========== */
 /* 虛線邊框提示可點擊上傳 */
 .form-file-input {
-    padding: 10px;
+    padding: 0.62rem;
     border: 2px dashed #ddd;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
 /* ========== 單選按鈕 ========== */
 .form-radio-group {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .form-radio-label {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     cursor: pointer;
 }
 
 /* ========== 送出按鈕 ========== */
 .form-submit-btn {
-    padding: 15px;
+    padding: 1rem;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 0.62rem;
     transition: background-color 0.3s;
 }
 
@@ -145,18 +145,18 @@
 /* ========== 功能按鈕組 ========== */
 .form-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 0.62rem;
+    margin-top: 1.25rem;
 }
 
 .btn-submit,
 .btn-found,
 .btn-cancel {
     flex: 1;
-    padding: 15px;
+    padding: 1rem;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
@@ -178,8 +178,8 @@
 }
 
 .btn-found:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(76, 175, 80, 0.4);
 }
 
 .btn-cancel {
@@ -200,18 +200,18 @@
 }
 
 /* ========== 圖片預覽區 ========== */
-/* Grid 自動填充，最小 150px */
+/* Grid 自動填充，最小 9.37rem */
 .form-previews {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(9.37rem, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 /* 使用 aspect-ratio 保持正方形 */
 .form-preview-item {
     position: relative;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     aspect-ratio: 1;  /* 保持 1:1 比例 */
     border: 2px solid #e5e7eb;
@@ -228,21 +228,21 @@
 /* 絕對定位在右上角 */
 .form-remove-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border-radius: 50%;
     background: rgba(239, 68, 68, 0.9);
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.12rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
 .form-remove-btn:hover {
@@ -255,116 +255,116 @@
 /* 平板尺寸 */
 @media (max-width: 1024px) {
     .form-container {
-        max-width: 700px;
+        max-width: 43.75rem;
     }
 }
 
 /* 小平板 */
 @media (max-width: 768px) {
     .form-container {
-        padding: 18px;
+        padding: 1.12rem;
         margin: 1rem;
     }
     
     .form-title {
         font-size: 1.5rem;
-        margin-bottom: 25px;
+        margin-bottom: 1.5rem;
     }
     
     .form {
-        gap: 18px;
+        gap: 1.12rem;
     }
     
     /* 保持兩欄，但縮小間距 */
     .form-row {
-        gap: 12px;
+        gap: 0.75rem;
     }
     
     .form-label {
-        font-size: 13px;
+        font-size: 0.75rem;
     }
     
     .form-input,
     .form-select,
     .form-textarea {
-        padding: 10px;
-        font-size: 14px;
+        padding: 0.62rem;
+        font-size: 0.87rem;
     }
     
     /* 圖片預覽改為兩欄 */
     .form-previews {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 0.75rem;
     }
     
     .form-submit-btn {
-        padding: 14px;
-        font-size: 15px;
+        padding: 0.88rem;
+        font-size: 0.88rem;
     }
 }
 
 /* 手機直向 */
 @media (max-width: 480px) {
     .form-container {
-        padding: 15px;
+        padding: 0.88rem;
         margin: 0.5rem;
-        border-radius: 10px;
+        border-radius: 0.62rem;
     }
     
     .form-title {
         font-size: 1.3rem;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
     
     .form {
-        gap: 15px;
+        gap: 1rem;
     }
     
     /* 改為單欄 */
     .form-row {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 1rem;
     }
     
     .form-group {
-        gap: 6px;
+        gap: 0.4rem;
     }
     
     .form-label {
-        font-size: 14px;
+        font-size: 0.87rem;
         font-weight: 600;
     }
     
     .form-input,
     .form-select,
     .form-textarea {
-        padding: 12px;
-        font-size: 16px; /* iOS 避免自動縮放 */
-        border-width: 1px;
+        padding: 0.75rem;
+        font-size: 1rem; /* iOS 避免自動縮放 */
+        border-width: 0.0625rem;
     }
     
     /* 圖片上傳區 */
     .form-file-input {
-        padding: 12px;
-        font-size: 14px;
+        padding: 0.75rem;
+        font-size: 0.87rem;
     }
     
     /* 圖片預覽改為兩欄較大 */
     .form-previews {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 0.625rem;
     }
     
     /* 單選按鈕改為垂直排列 */
     .form-radio-group {
         flex-direction: column;
-        gap: 12px;
+        gap: 0.75rem;
     }
     
     .form-radio-label {
-        padding: 10px;
+        padding: 0.625rem;
         background: #f5f5f5;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         transition: background 0.2s;
     }
     
@@ -378,27 +378,27 @@
     .btn-submit,
     .btn-found,
     .btn-cancel {
-        padding: 14px;
-        font-size: 16px;
-        min-height: 48px; /* iOS 觸控優化 */
+        padding: 0.87rem;
+        font-size: 1rem;
+        min-height: 3rem; /* iOS 觸控優化 */
     }
     
     /* 功能按鈕改為垂直排列 */
     .form-actions {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
     }
     
     .form-error {
-        padding: 10px;
-        font-size: 14px;
+        padding: 0.625rem;
+        font-size: 0.87rem;
     }
 }
 
 /* 超小手機 */
 @media (max-width: 360px) {
     .form-container {
-        padding: 12px;
+        padding: 0.75rem;
     }
     
     .form-title {
@@ -408,7 +408,7 @@
     .form-input,
     .form-select,
     .form-textarea {
-        padding: 10px;
+        padding: 0.625rem;
     }
     
     /* 圖片預覽改為單欄 */
@@ -431,8 +431,8 @@
     .form-select {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 12px center;
-        padding-right: 35px;
+        background-position: right 0.75rem center;
+        padding-right: 2.2rem;
     }
     
     /* 日期選擇器優化 */
@@ -451,15 +451,15 @@
     
     /* 單選按鈕放大觸控區域 */
     .form-radio-label input[type="radio"] {
-        width: 20px;
-        height: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
         cursor: pointer;
     }
     
     /* 圖片刪除按鈕放大 */
     .form-remove-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.125rem;
     }
 }

@@ -47,11 +47,11 @@ const Header = ({ onShowForm, showForm, onGoHome, onShowProfile, onShowAbout }) 
         if (window.confirm('確定要登出嗎？')) {
             try {
                 await logout();
-                toast.success('✅ 已登出');
+                toast.success('已登出');
                 onGoHome();
             } catch (error) {
                 console.error('登出失敗:', error);
-                toast.error('❌ 登出失敗');
+                toast.error('登出失敗');
             }
         }
     };
