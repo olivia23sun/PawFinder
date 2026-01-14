@@ -99,9 +99,9 @@ nav {
     border-radius: 1.5rem;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: all 0.3s;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .btn-post:hover {
@@ -116,7 +116,7 @@ nav {
     padding: 0.625rem 1.25rem;
     border-radius: 1.5rem;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s;
     border: none;

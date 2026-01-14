@@ -7,6 +7,7 @@ import TAIWAN_CITIES from '../../constants/taiwanCities';
 import './AddDogForm.css';
 import { useAuth } from '../../contexts/AuthContext';
 import DOG_STATUS from '../../constants/status';
+import { translateFirebaseError } from '../../utils/errorHelpers';
 
 const AddDogForm = ({ onSuccess }) => {
   const { currentUser, userProfile } = useAuth();
@@ -226,9 +227,10 @@ const AddDogForm = ({ onSuccess }) => {
         onSuccess();
       }
 
-    } catch (err) {
-      console.error('新增失敗:', err);
-      setError('新增失敗：' + err.message);
+    } catch (error) {
+      const friendlyMessage = translateFirebaseError(error.code);
+      setError(`❌ 發布失敗：${friendlyMessage}`);
+      console.error('新增失敗:', error);
     } finally {
       setLoading(false);
     }

@@ -5,8 +5,8 @@ const ContactModal = ({ dog, onClose }) => {
     if (!dog) return null;
 
     // ========== 複製到剪貼簿 ==========
-    const handleCopyToClipboard = (text) => {
-        navigator.clipboard.writeText(text);
+    const handleCopyToClipboard = async (text) => {
+        await navigator.clipboard.writeText(text);
         toast.success('已複製到剪貼簿！');
     };
 

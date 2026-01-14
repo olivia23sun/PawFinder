@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import { translateFirebaseError } from '../../utils/errorHelpers';
 import './Auth.css';
 
 const Signup = ({ onSwitchToLogin, onClose }) => {
@@ -69,28 +70,16 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
             
             toast.success('註冊成功！歡迎加入 PawFinder');
                 if (onClose) {
-                console.log('✅ 執行 onClose');
+                console.log('✅執行 onClose');
                 onClose();
                 } else {
-                console.error('❌ onClose 未定義！');
+                console.error('❌onClose 未定義！');
                 }
 
         } catch (err) {
             console.error('註冊失敗:', err);
-            
-            switch (err.code) {
-                case 'auth/email-already-in-use':
-                    setError('❌ 此電子郵件已被註冊');
-                    break;
-                case 'auth/invalid-email':
-                    setError('❌ 電子郵件格式不正確');
-                    break;
-                case 'auth/weak-password':
-                    setError('❌ 密碼強度太弱');
-                    break;
-                default:
-                    setError('❌ 註冊失敗：' + err.message);
-            }
+            const friendlyMessage = translateFirebaseError(err.code);
+            setError(`❌ ${friendlyMessage}`);
         } finally {
             setLoading(false);
         }

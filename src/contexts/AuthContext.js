@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import { translateFirebaseError } from '../utils/errorHelpers';
 
 // ========== 建立 Context ==========
 // 用於在整個應用程式中共享使用者狀態
@@ -51,14 +52,18 @@ export const AuthProvider = ({ children }) => {
             return user;
         } catch (error) {
             console.error('註冊失敗:', error);
-            throw error;
+            throw new Error(translateFirebaseError(error.code));
         }
     };
 
     // ========== 登入功能 ==========
     const login = async (email, password) => {
         // Firebase 會自動觸發 onAuthStateChanged
-        return await signInWithEmailAndPassword(auth, email, password);
+        try {
+            return await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            throw new Error(translateFirebaseError(error.code));
+        }
     };
 
     // ========== 登出功能 ==========

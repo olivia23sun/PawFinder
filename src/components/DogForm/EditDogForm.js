@@ -5,6 +5,7 @@ import { db, storage } from '../../firebase';
 import toast from 'react-hot-toast';
 import DOG_STATUS from '../../constants/status';
 import './EditDogForm.css';
+import { translateFirebaseError } from '../../utils/errorHelpers';
 
 const EditDogForm = ({ dog, onComplete, onCancel }) => {
     const [formData, setFormData] = useState({
@@ -118,8 +119,9 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
             toast.success('✅ 已標記為尋獲！');
             onComplete();
         } catch (error) {
+            const friendlyMessage = translateFirebaseError(error.code);
+            toast.error(`發布失敗：${friendlyMessage}`);
             console.error('❌ 標記失敗:', error);
-            toast.error('標記失敗：' + error.message);
         } finally {
             setLoading(false);
         }
@@ -160,8 +162,9 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
             toast.success('更新成功！');
             onComplete();
         } catch (error) {
+            const friendlyMessage = translateFirebaseError(error.code);
+            toast.error(`${friendlyMessage}`);
             console.error('更新失敗:', error);
-            toast.error('更新失敗，請稍後再試');
         } finally {
             setLoading(false);
         }

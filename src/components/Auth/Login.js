@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import { translateFirebaseError } from '../../utils/errorHelpers';
 import './Auth.css';
 
 const Login = ({ onSwitchToSignup, onClose }) => {
@@ -23,7 +24,8 @@ const Login = ({ onSwitchToSignup, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        setError('');
+
         if (!formData.email || !formData.password) {
             setError('❌ 請填寫所有欄位');
             return;
@@ -37,26 +39,11 @@ const Login = ({ onSwitchToSignup, onClose }) => {
             toast.success('登入成功！');
             onClose(); 
         } catch (err) {
-            console.error('登入失敗:', err);
-                switch (err.code) {
-                case 'auth/invalid-email':
-                    setError('❌ 電子郵件格式不正確');
-                    break;
-                case 'auth/user-not-found':
-                    setError('❌ 找不到此帳號，請先註冊');
-                    break;
-                case 'auth/wrong-password':
-                    setError('❌ 密碼錯誤');
-                    break;
-                case 'auth/invalid-credential':
-                    setError('❌ 帳號或密碼錯誤');
-                    break;
-                default:
-                    setError('❌ 登入失敗：' + err.message);
-            }
-        } finally {
-            setLoading(false);
-        }
+        const friendlyMessage = translateFirebaseError(err.code);
+        setError(`❌ ${friendlyMessage}`);
+    } finally {
+        setLoading(false);
+    }
     };
 
     return (

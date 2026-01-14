@@ -4,6 +4,7 @@ import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import DOG_STATUS from '../../constants/status';
+import { translateFirebaseError } from '../../utils/errorHelpers';
 import './Profile.css';
 
 const Profile = ({ onEditDog, onUpdate }) => {
@@ -74,8 +75,9 @@ const Profile = ({ onEditDog, onUpdate }) => {
 
                 toast.success(newStatus === DOG_STATUS.FOUND ? '已標記為「已找到」' : '已改回「尋找中」');
             } catch (error) {
+                const friendlyMessage = translateFirebaseError(error.code);
+                toast.error(`${friendlyMessage}`);
                 console.error('❌ 更新失敗:', error);
-                toast.error('更新失敗，請稍後再試');
             }
         }
     };
@@ -98,8 +100,8 @@ const Profile = ({ onEditDog, onUpdate }) => {
                 }
                 toast.success('✅ 刪除成功！');
             } catch (error) {
-                console.error('❌ 刪除失敗:', error);
-                toast.error('刪除失敗，請稍後再試');
+                const friendlyMessage = translateFirebaseError(error.code);
+                toast.error(`❌ ${friendlyMessage}`);
             }
         }
     };
