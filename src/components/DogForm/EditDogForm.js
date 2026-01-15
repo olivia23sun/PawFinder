@@ -41,17 +41,21 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         const files = Array.from(e.target.files);
 
         if (totalImages + files.length > 3) {
-            setError(`最多只能有 3 張照片（目前：${totalImages} 張）`);
+            toast.error(`最多只能有 3 張照片（目前：${totalImages} 張）`);
+            e.target.value = '';
             return;
         }
 
         for (let file of files) {
             if (file.size > 2 * 1024 * 1024) {
-                setError('每張圖片大小不能超過 2MB');
+                toast.error('每張圖片大小不能超過 2MB');
+                e.target.value = '';
                 return;
             }
-            if (!file.type.startsWith('image/')) {
-                setError('請選擇圖片檔案');
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                toast.error('只支援 JPG、PNG 或 WebP 格式');
+                e.target.value = '';
                 return;
             }
         }

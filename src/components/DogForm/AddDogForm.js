@@ -59,7 +59,7 @@ const AddDogForm = ({ onSuccess }) => {
     
     // 檢查是否超過3張
     if (imageFiles.length + files.length > 3) {
-      setError('最多只能上傳 3 張照片');
+      toast.error('最多只能上傳 3 張照片');
       return;
     }
 
@@ -67,14 +67,17 @@ const AddDogForm = ({ onSuccess }) => {
     for (let file of files) {
       // 驗證檔案大小 (2MB = 2 * 1024 * 1024 bytes)
       if (file.size > 2 * 1024 * 1024) {
-        setError('每張圖片大小不能超過 2MB');
+        toast.error('每張圖片大小不能超過 2MB');
+        e.target.value = '';
         return;
       }
 
       // 驗證檔案類型
-      if (!file.type.startsWith('image/')) {
-        setError('請選擇圖片檔案');
-        return;
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+      if (!allowedTypes.includes(file.type)) {
+          toast.error('只支援 JPG、PNG 或 WebP 格式');
+          e.target.value = '';
+          return;
       }
     }
 
