@@ -167,8 +167,8 @@
     font-size: 0.875rem;
 }
 
-/* 已找到標籤 */
-.found-badge {
+/* 狀態標籤 */
+.status-badge {
     position: absolute;
     top: 0.625rem;
     left: 0.625rem;

@@ -29,7 +29,7 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
     const getDaysLost = () => {
         if (!dog.createdAt) return null;
         const now = new Date();
-        const lostDate = dog.createdAt.toDate();
+        const lostDate = new Date(dog.lostDate);
         const days = Math.floor((now - lostDate) / (1000 * 60 * 60 * 24));
         return days;
     };

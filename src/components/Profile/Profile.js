@@ -119,11 +119,16 @@ const Profile = ({ onEditDog, onUpdate }) => {
         return dog.status === filter;
     });
 
-    const getDaysLost = (createdAt) => {
-        if (!createdAt) return null;
+    const getDaysLost = (lostDate) => {
+        // 檢查是否有走失日期
+        if (!lostDate) return null;
+        
         const now = new Date();
-        const lostDate = createdAt.toDate();
-        const days = Math.floor((now - lostDate) / (1000 * 60 * 60 * 24));
+        const lost = new Date(lostDate); // lostDate 是字串格式 "YYYY-MM-DD"
+        
+        // 計算天數差
+        const days = Math.floor((now - lost) / (1000 * 60 * 60 * 24));
+        
         return days;
     };
 
@@ -261,9 +266,10 @@ const Profile = ({ onEditDog, onUpdate }) => {
                                     ) : (
                                         <div className="no-image">無照片</div>
                                     )}
-                                    {dog.status === 'found' && (
-                                        <div className="found-badge">已找到</div>
-                                    )}
+                                    {dog.status === 'found' ? (
+                                        <div className="status-badge">已找到</div>)
+                                        : (<div className="status-badge">尋找中</div>)
+                                    }
                                 </div>
 
                                 {/* 資訊 */}
@@ -276,7 +282,7 @@ const Profile = ({ onEditDog, onUpdate }) => {
                                         <p>地點｜{dog.location}</p>
                                         <p>特徵｜{dog.breed} · {dog.color} · {dog.gender}</p>
                                         <p>描述｜{dog.description}</p>
-                                        <p>{getDaysLost(dog.createdAt) !== null ? `走失 ${getDaysLost(dog.createdAt)} 天` : '日期未知'}</p>
+                                        <p>{getDaysLost(dog.createdAt) !== null ? `走失 ${getDaysLost(dog.lostDate)} 天` : '日期未知'}</p>
                                     </div>
 
                                     {/* 操作按鈕 */}
