@@ -6,26 +6,28 @@ import HeroCarousel from './components/HeroCarousel/HeroCarousel';
 import FilterSection from './components/FilterSection/FilterSection';
 import './index.css';
 import DogCard from './components/DogCard/DogCard';
-import EditDogForm from './components/DogForm/EditDogForm'; 
+import EditDogForm from './components/DogForm/EditDogForm';
 import AddDogForm from './components/DogForm/AddDogForm';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profile from './components/Profile/Profile';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
+import { query, orderBy } from 'firebase/firestore';
 
 function AppContent() {
-  const { currentUser } = useAuth(); 
-  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+  const { currentUser } = useAuth();
+  const headerHeight =
+    document.querySelector('header')?.offsetHeight || 0;
 
   // ========== State 管理 ==========
-  const [dogs, setDogs] = useState([]);              // 所有狗狗資料
-  const [filteredDogs, setFilteredDogs] = useState([]); // 篩選後的資料
-  const [loading, setLoading] = useState(true);      // 載入狀態
-  const [error, setError] = useState('');            // 錯誤訊息
-  const [showForm, setShowForm] = useState(false);   // 是否顯示新增表單
-  const [editingDog, setEditingDog] = useState(null); // 正在編輯的狗狗
+  const [dogs, setDogs] = useState([]);
+  const [filteredDogs, setFilteredDogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [showForm, setShowForm] = useState(false);
+  const [editingDog, setEditingDog] = useState(null);
 
-   // ========== 從 URL hash 讀取初始頁面 ==========
+  // ========== 從 URL hash 讀取初始頁面 ==========
   const getInitialPage = () => {
     const hash = window.location.hash.slice(1);
     if (hash === 'profile') {
@@ -46,27 +48,29 @@ function AppContent() {
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () =>
+      window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // ========== 初始化：從 Firebase 載入資料 ==========
   useEffect(() => {
     fetchDogs();
   }, []);
-  
 
   // ========== 從 Firestore 讀取所有通報 ==========
   const fetchDogs = async () => {
     try {
       setLoading(true);
       setError('');
-      
-      const snapshot = await getDocs(collection(db, 'lostDogs'));
-      const dogsData = snapshot.docs.map(doc => ({
+
+      const q = query(collection(db, 'lostDogs'), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+
+      const dogsData = snapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       }));
-      
+
       setDogs(dogsData);
       setFilteredDogs(dogsData);
       console.log('✅ 成功讀取資料:', dogsData);
@@ -84,25 +88,34 @@ function AppContent() {
 
     // 地區篩選
     if (filters.region) {
-      result = result.filter(dog => dog.location === filters.region);
+      result = result.filter(
+        (dog) => dog.location === filters.region
+      );
     }
 
     // 項圈篩選
     if (filters.collar) {
-      result = result.filter(dog => dog.collar === filters.collar);
+      result = result.filter(
+        (dog) => dog.collar === filters.collar
+      );
     }
 
-    // 時間篩選：計算走失天數
+    // 時間篩選
     if (filters.date) {
       const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      
-      result = result.filter(dog => {
+      const today = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+      );
+
+      result = result.filter((dog) => {
         if (!dog.createdAt) return false;
-      
+
         const dogDate = dog.createdAt.toDate();
-        // 計算天數差：(毫秒差 / 1000 / 60 / 60 / 24)
-        const daysDiff = Math.floor((now - dogDate) / (1000 * 60 * 60 * 24));
+        const daysDiff = Math.floor(
+          (now - dogDate) / (1000 * 60 * 60 * 24)
+        );
 
         switch (filters.date) {
           case 'today':
@@ -117,40 +130,42 @@ function AppContent() {
       });
     }
 
-    // 關鍵字搜尋：支援名字、品種、描述、顏色
+    // 關鍵字搜尋
     if (filters.search) {
       const searchLower = filters.search.toLowerCase();
-      result = result.filter(dog => 
-        dog.name?.toLowerCase().includes(searchLower) ||
-        dog.breed?.toLowerCase().includes(searchLower) ||
-        dog.description?.toLowerCase().includes(searchLower) ||
-        dog.color?.toLowerCase().includes(searchLower)
+      result = result.filter(
+        (dog) =>
+          dog.name?.toLowerCase().includes(searchLower) ||
+          dog.breed?.toLowerCase().includes(searchLower) ||
+          dog.description
+            ?.toLowerCase()
+            .includes(searchLower) ||
+          dog.color?.toLowerCase().includes(searchLower)
       );
     }
 
     setFilteredDogs(result);
   };
 
-  // ========== 新增成功回調 ==========
+  // ========== 新增成功 ==========
   const handleDogAdded = () => {
-    fetchDogs();         // 重新讀取資料
-    setShowForm(false);  // 關閉表單
+    fetchDogs();
+    setShowForm(false);
   };
-  
-  // ========== Header「發布按鈕」點擊 ==========
-  const handleShowForm = () => {
-    setEditingDog(null);  // 清空編輯狀態
-    setShowForm(!showForm); // 切換表單顯示
 
-    // 確保在首頁顯示表單
+  // ========== Header 發布 ==========
+  const handleShowForm = () => {
+    setEditingDog(null);
+    setShowForm(!showForm);
+
     if (!showForm) {
       window.location.hash = 'home';
       setCurrentPage('home');
     }
 
-    // 延遲滾動，等表單渲染完成
     setTimeout(() => {
-      const formElement = document.getElementById('add-dog-form');
+      const formElement =
+        document.getElementById('add-dog-form');
       if (formElement) {
         const y = formElement.offsetTop - headerHeight;
         window.scrollTo({ top: y, behavior: 'smooth' });
@@ -158,25 +173,26 @@ function AppContent() {
     }, 100);
   };
 
-  // ========== 編輯按鈕處理 ==========
+  // ========== 編輯 ==========
   const handleEdit = (dog) => {
-    // 權限檢查：只有發布者可以編輯
     if (currentUser && dog.userId === currentUser.uid) {
-      // 先清空狀態，強制重新渲染
       setEditingDog(null);
       setShowForm(false);
-      setCurrentPage('home'); 
-      
-      // 延遲設定新資料
+      setCurrentPage('home');
+
       setTimeout(() => {
         setEditingDog(dog);
-        
-        // 再延遲滾動到表單
+
         setTimeout(() => {
-          const formElement = document.getElementById('edit-dog-form');
+          const formElement =
+            document.getElementById('edit-dog-form');
           if (formElement) {
-            const y = formElement.offsetTop - headerHeight;
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            const y =
+              formElement.offsetTop - headerHeight;
+            window.scrollTo({
+              top: y,
+              behavior: 'smooth',
+            });
           }
         }, 100);
       }, 10);
@@ -185,9 +201,8 @@ function AppContent() {
     }
   };
 
-  // ========== 刪除按鈕處理 ==========
+  // ========== 刪除 ==========
   const handleDelete = async (dogId, userId) => {
-    // 權限檢查
     if (!currentUser) {
       toast.error('⚠️ 請先登入');
       return;
@@ -198,11 +213,10 @@ function AppContent() {
       return;
     }
 
-    // 二次確認
     if (window.confirm('確定要刪除這筆通報嗎？')) {
       try {
         await deleteDoc(doc(db, 'lostDogs', dogId));
-        await fetchDogs(); // 重新載入資料
+        await fetchDogs();
         toast.success('刪除成功！');
       } catch (error) {
         console.error('❌ 刪除失敗:', error);
@@ -211,7 +225,7 @@ function AppContent() {
     }
   };
 
-  // ========== 編輯完成回調 ==========
+  // ========== 編輯完成 ==========
   const handleEditComplete = () => {
     setEditingDog(null);
     fetchDogs();
@@ -231,7 +245,7 @@ function AppContent() {
     setShowForm(false);
     setEditingDog(null);
     setCurrentPage('profile');
-    window.location.hash = 'profile'; 
+    window.location.hash = 'profile';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -241,38 +255,45 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Header 
-        onShowForm={handleShowForm} 
-        showForm={showForm} 
+      <Header
+        onShowForm={handleShowForm}
+        showForm={showForm}
         onGoHome={handleGoHome}
         onShowProfile={handleShowProfile}
       />
 
-{currentPage === 'profile' && (
-        <Profile 
-          onEditDog={handleEdit} 
+      {currentPage === 'profile' && (
+        <Profile
+          onEditDog={handleEdit}
           onUpdate={handleProfileUpdate}
         />
       )}
-{currentPage === 'home' && (
+
+      {currentPage === 'home' && (
         <>
           <HeroCarousel />
-          <FilterSection onFilterChange={handleFilterChange} />
+          <FilterSection
+            onFilterChange={handleFilterChange}
+          />
 
           <div className="container">
             {/* 錯誤訊息顯示 */}
             {error && (
-              <div style={{
-                padding: '1.25rem',
-                background: '#fee',
-                color: '#c33',
-                borderRadius: '0.5rem',
-                margin: '1.25rem 0',
-                textAlign: 'center',
-                border: '1px solid #fcc'
-              }}>
-                <p style={{ margin: '0 0 0.625rem 0' }}>{error}</p>
-                <button 
+              <div
+                style={{
+                  padding: '1.25rem',
+                  background: '#fee',
+                  color: '#c33',
+                  borderRadius: '0.5rem',
+                  margin: '1.25rem 0',
+                  textAlign: 'center',
+                  border: '1px solid #fcc',
+                }}
+              >
+                <p style={{ margin: '0 0 0.625rem 0' }}>
+                  {error}
+                </p>
+                <button
                   onClick={fetchDogs}
                   style={{
                     padding: '0.5rem 1rem',
@@ -280,7 +301,7 @@ function AppContent() {
                     color: 'white',
                     border: 'none',
                     borderRadius: '0.25rem',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                   }}
                 >
                   重試
@@ -288,56 +309,85 @@ function AppContent() {
               </div>
             )}
 
-            {/* 編輯表單（條件顯示）*/}
+            {/* 編輯表單 */}
             {editingDog && (
               <div id="edit-dog-form">
-                <EditDogForm 
+                <EditDogForm
                   dog={editingDog}
                   onComplete={handleEditComplete}
-                  onCancel={() => setEditingDog(null)}
+                  onCancel={() =>
+                    setEditingDog(null)
+                  }
                 />
               </div>
             )}
 
-            {/* 新增表單（條件顯示）*/}
+            {/* 新增表單 */}
             {showForm && (
               <AddDogForm onSuccess={handleDogAdded} />
             )}
-            
-            {/* 載入狀態 or 卡片列表 */}
+
+            {/* 載入或列表 */}
             {loading ? (
-              <p style={{ textAlign: 'center', padding: '2.5rem' }}>載入中...</p>
+              <p
+                style={{
+                  textAlign: 'center',
+                  padding: '2.5rem',
+                }}
+              >
+                載入中...
+              </p>
             ) : (
               <>
-                <p style={{ 
-                  textAlign: 'center', 
-                  fontSize: '1.12rem', 
-                  color: '#666',
-                  marginBottom: '1.25rem',
-                  fontWeight: '500'
-                }}>
-                  顯示 <strong style={{ color: 'rgb(80,80,80)',fontSize: '1.87rem' }}>{filteredDogs.length}</strong> 隻毛孩
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.12rem',
+                    color: '#666',
+                    marginBottom: '1.25rem',
+                    fontWeight: '500',
+                  }}
+                >
+                  顯示{' '}
+                  <strong
+                    style={{
+                      color: 'rgb(80,80,80)',
+                      fontSize: '1.87rem',
+                    }}
+                  >
+                    {filteredDogs.length}
+                  </strong>{' '}
+                  隻毛孩
                 </p>
-              
-                <section className="cards-grid">
-                  {filteredDogs.length === 0 ? (
-                    <p style={{ textAlign: 'center', padding: '2.5rem' }}>
-                      {dogs.length === 0 
+
+                {filteredDogs.length === 0 ? (
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      padding: '2.5rem',
+                    }}
+                  >
+                    <p>
+                      {dogs.length === 0
                         ? '目前沒有走失毛孩資料'
                         : '沒有符合條件的毛孩 😢'}
                     </p>
-                  ) : (
-                    filteredDogs.map(dog => (
-                      <DogCard 
-                        key={dog.id} 
+                  </div>
+                ) : (
+                  <section className="cards-grid">
+                    {filteredDogs.map((dog) => (
+                      <DogCard
+                        key={dog.id}
                         dog={dog}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
-                        currentUserId={currentUser?.uid}
+                        currentUserId={
+                          currentUser?.uid
+                        }
                       />
-                    ))
-                  )}
-                </section>
+                    ))}
+                  </section>
+                )}
               </>
             )}
           </div>
@@ -347,11 +397,14 @@ function AppContent() {
   );
 }
 
-// ========== App 主元件：包裝 AuthProvider ==========
+// ========== App 主元件 ==========
 function App() {
   return (
     <AuthProvider>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <AppContent />
     </AuthProvider>
   );
