@@ -67,6 +67,14 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
                 formData.displayName,
                 formData.phone
             );
+
+            setFormData({
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                phone: ''
+            });
             
             toast.success('註冊成功！歡迎加入 PawFinder');
                 if (onClose) {
@@ -85,8 +93,15 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
         }
     };
 
+    const handleOverlayClick = (e) => {
+        // 只有點擊遮罩本身（非拖曳）才關閉
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="auth-modal-overlay" onClick={onClose}>
+        <div className="auth-modal-overlay" onMouseDown={handleOverlayClick}>
             <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
                 <button className="auth-modal-close" onClick={onClose}>✕</button>
                 
@@ -136,6 +151,7 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
                         <input
                             type="password"
                             name="password"
+                            autoComplete="new-password"
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="請輸入密碼"
@@ -148,6 +164,7 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
                         <input
                             type="password"
                             name="confirmPassword"
+                            autoComplete="new-password"
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             placeholder="再次輸入密碼"

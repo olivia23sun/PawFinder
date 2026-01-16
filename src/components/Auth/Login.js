@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import { translateFirebaseError } from '../../utils/errorHelpers';
@@ -9,6 +9,8 @@ const Login = ({ onSwitchToSignup, onClose }) => {
         email: '',
         password: ''
     });
+
+    console.log('當前表單資料:', formData);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     
@@ -45,9 +47,16 @@ const Login = ({ onSwitchToSignup, onClose }) => {
         setLoading(false);
     }
     };
+    
+    const handleOverlayClick = (e) => {
+        // 只有點擊遮罩本身（非拖曳）才關閉
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
 
     return (
-        <div className="auth-modal-overlay" onClick={onClose}>
+        <div className="auth-modal-overlay" onMouseDown={handleOverlayClick}>
             <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
                 <button className="auth-modal-close" onClick={onClose}>✕</button>
                 
@@ -73,6 +82,7 @@ const Login = ({ onSwitchToSignup, onClose }) => {
                         <input
                             type="password"
                             name="password"
+                            autoComplete="new-password"
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="請輸入密碼"
