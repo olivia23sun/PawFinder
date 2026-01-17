@@ -49,6 +49,8 @@ export const AuthProvider = ({ children }) => {
                 role: 'user'
             });
 
+            await fetchUserProfile(user.uid);
+            
             return user;
         } catch (error) {
             console.error('註冊失敗:', error);

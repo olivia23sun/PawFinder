@@ -178,8 +178,6 @@ function AppContent() {
     if (currentUser && dog.userId === currentUser.uid) {
       setEditingDog(null);
       setShowForm(false);
-      setCurrentPage('home');
-
       setTimeout(() => {
         setEditingDog(dog);
 
