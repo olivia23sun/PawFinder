@@ -174,7 +174,13 @@ const AddDogForm = ({ onSuccess }) => {
       setError('請至少上傳 1 張毛孩照片');
       return false;
     }
-    
+
+    // 檢查描述字數
+    if (formData.description.length > 100) {
+        setError('❌ 詳細描述不可超過 100 字');
+        return false;
+    }
+
     return true;
   };
 
@@ -223,7 +229,7 @@ const AddDogForm = ({ onSuccess }) => {
       setImageFiles([]);
       setImagePreviews([]);
 
-      toast.success('✅ 通報成功！');
+      toast.success('通報成功！');
       
       // 5. 通知父組件更新列表
       if (onSuccess) {
