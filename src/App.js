@@ -177,7 +177,7 @@ function AppContent() {
   const handleEdit = (dog) => {
     if (currentUser && dog.userId === currentUser.uid) {
       setEditingDog(null);
-      setShowForm(false);
+      setShowForm(false); 
       setTimeout(() => {
         setEditingDog(dog);
 
