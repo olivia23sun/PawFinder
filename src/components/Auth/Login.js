@@ -40,9 +40,8 @@ const Login = ({ onSwitchToSignup, onClose }) => {
             await login(formData.email, formData.password);
             toast.success('登入成功！');
             onClose(); 
-        } catch (err) {
-        const friendlyMessage = translateFirebaseError(err.code);
-        setError(`❌ ${friendlyMessage}`);
+        } catch (err) { 
+            toast.error(`${err.message}`);
     } finally {
         setLoading(false);
     }

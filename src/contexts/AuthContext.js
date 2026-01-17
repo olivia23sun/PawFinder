@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
             return user;
         } catch (error) {
             console.error('註冊失敗:', error);
-            throw new Error(translateFirebaseError(error.code));
+            throw error;
         }
     };
 
@@ -62,7 +62,8 @@ export const AuthProvider = ({ children }) => {
         try {
             return await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-            throw new Error(translateFirebaseError(error.code));
+            console.error('登入失敗:', error);
+            throw error;
         }
     };
 

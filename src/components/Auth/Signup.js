@@ -86,8 +86,7 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
 
         } catch (err) {
             console.error('註冊失敗:', err);
-            const friendlyMessage = translateFirebaseError(err.code);
-            setError(`❌ ${friendlyMessage}`);
+            toast.error(`${err.message}`);
         } finally {
             setLoading(false);
         }
@@ -99,7 +98,7 @@ const Signup = ({ onSwitchToLogin, onClose }) => {
             onClose();
         }
     };
-
+    
     return (
         <div className="auth-modal-overlay" onMouseDown={handleOverlayClick}>
             <div className="auth-modal" onClick={(e) => e.stopPropagation()}>

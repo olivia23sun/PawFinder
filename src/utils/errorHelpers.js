@@ -10,9 +10,9 @@ export const translateFirebaseError = (code) => {
         case 'auth/invalid-email':
             return '電子郵件格式不正確';
         case 'auth/user-not-found':
-            return '找不到此帳號，請先註冊';
         case 'auth/wrong-password':
-            return '密碼錯誤，請重新輸入';
+        case 'auth/invalid-credential': 
+            return '電子郵件或密碼錯誤，若尚未註冊請先建立帳號';
         case 'auth/email-already-in-use':
             return '此電子信箱已被其他帳號使用';
         case 'auth/weak-password':
