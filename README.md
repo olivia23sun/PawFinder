@@ -136,10 +136,12 @@ await addDoc(collection(db, 'lostDogs'), { ...formData, imageUrls });
 ```firestore
 // Firebase Security Rules - 多層次權限控管
 
-// 通報資料：登入可讀，僅原作者可修改
+// 通報資料：任何人都可以瀏覽，登入後才能新增；
+// 只有通報者本人可以修改或刪除自己的資料
 match /lostDogs/{dogId} {
-  allow read, create: if request.auth != null;
-  allow update, delete: if request.auth != null 
+  allow read: if true;
+  allow create: if request.auth != null;
+  allow update, delete: if request.auth != null
     && request.auth.uid == resource.data.userId;
 }
 
