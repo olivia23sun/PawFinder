@@ -10,7 +10,6 @@ const Login = ({ onSwitchToSignup, onClose }) => {
         password: ''
     });
 
-    console.log('當前表單資料:', formData);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     

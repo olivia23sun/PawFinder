@@ -56,7 +56,7 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                         alt={dog.name}
                         className="card-image"
                         loading="lazy"
-                        title="點擊放大寵物44444照片"
+                        title="點擊放大寵物照片"
                     />
                     
                     {/* 多張圖片時顯示左右切換按鈕 */}

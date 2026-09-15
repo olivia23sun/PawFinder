@@ -1,3 +1,4 @@
+// Firebase 初始化：集中管理 Firestore / Storage / Auth 實例，避免各元件重複初始化
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';

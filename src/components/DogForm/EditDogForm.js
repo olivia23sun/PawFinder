@@ -8,6 +8,8 @@ import './EditDogForm.css';
 import { translateFirebaseError } from '../../utils/errorHelpers';
 
 const EditDogForm = ({ dog, onComplete, onCancel }) => {
+
+    // ========== 表單狀態管理 ==========
     const [formData, setFormData] = useState({
         name: dog.name || '',
         breed: dog.breed || '',
@@ -30,6 +32,7 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
     const today = new Date().toISOString().split('T')[0];
     const totalImages = existingImages.length + newImageFiles.length;
 
+    // ========== 處理一般輸入欄位 ==========
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -38,6 +41,7 @@ const EditDogForm = ({ dog, onComplete, onCancel }) => {
         }));
     };
 
+    // ========== 處理圖片選擇 ==========
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
 
