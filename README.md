@@ -34,7 +34,7 @@
 
 ## 專案截圖
 
-### 1. 首頁與混合式即時篩選系統
+### 1. 首頁與混合式即時篩選功能
 
 <img src="./public/screenshots/home_filter.png" width="80%" alt="首頁與篩選功能" />
 <p><i>透過前端即時過濾技術，實現點選條件後立即呈現搜尋結果，無需等待頁面重整。</i></p>
@@ -70,7 +70,7 @@
 ## 技術架構
 
 ### 前端開發
-- **React 18 (Hooks)**：全面採用 Functional Components，利用 useEffect 處理 Firebase 監聽，並透過 useContext 實作狀態共享。
+- **React 19 (Hooks)**：全面採用 Functional Components，利用 useEffect 處理 Firebase 監聽，並透過 useContext 實作狀態共享。
 - **Context API**：針對使用者認證（Auth）實作全域狀態管理。決策理由： 考量專案規模與維護成本，選擇輕量化的 Context API 替代 Redux，避免過度開發（Over-engineering）。
 - **Responsive Design**：使用 CSS3 Flexbox/Grid 結合 Bootstrap，確保飼主在戶外使用手機時能有流暢的通報體驗。
 
@@ -86,7 +86,7 @@ allow update, delete: if request.auth.uid == resource.data.userId;
 
 ### 開發規範與工具
 - **版本控制 (Git)**：遵循 Conventional Commits 規範進行提交，確保版本紀錄清晰、具備可讀性。
-- **自動化部署 (CI/CD)**：整合 Vercel 實作自動化部署，確保代碼推送至 main 分支後即時更新線上版本。
+- **自動化部署**：使用 Vercel 連接 GitHub，push 至 main 分支後自動觸發部署。
 - **套件管理**：使用 npm 進行相依性管理。
 
 ## 核心功能
@@ -153,8 +153,8 @@ match /users/{userId} {
 如果你想在本地端運行此專案，請參考以下步驟：
 
 ### 環境需求
-- Node.js 14.0 以上
-- npm 或 yarn
+- Node.js LTS
+- npm
 
 ### 安裝步驟
 
