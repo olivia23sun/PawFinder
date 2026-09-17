@@ -8,7 +8,6 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
-import { translateFirebaseError } from '../utils/errorHelpers';
 
 // ========== 建立 Context ==========
 // 用於在整個應用程式中共享使用者狀態
