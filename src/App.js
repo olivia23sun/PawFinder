@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, deleteDoc, getDocs, doc } from 'firebase/firestore';
+import { collection, deleteDoc, getDocs, doc, query, orderBy } from 'firebase/firestore';
 import { db } from './firebase';
 import Header from './components/Header/Header';
 import HeroCarousel from './components/HeroCarousel/HeroCarousel';
@@ -10,9 +10,7 @@ import EditDogForm from './components/DogForm/EditDogForm';
 import AddDogForm from './components/DogForm/AddDogForm';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profile from './components/Profile/Profile';
-import { Toaster } from 'react-hot-toast';
-import toast from 'react-hot-toast';
-import { query, orderBy } from 'firebase/firestore';
+import toast, { Toaster } from 'react-hot-toast';
 
 function AppContent() {
   const { currentUser } = useAuth();
