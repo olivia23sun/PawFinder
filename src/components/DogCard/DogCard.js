@@ -27,7 +27,7 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
 
     // ========== 計算走失天數 ==========
     const getDaysLost = () => {
-        if (!dog.createdAt) return null;
+        if (!dog.lostDate) return null;
         const now = new Date();
         const lostDate = new Date(dog.lostDate);
         const days = Math.floor((now - lostDate) / (1000 * 60 * 60 * 24));
