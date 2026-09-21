@@ -32,6 +32,7 @@ const FilterSection = ({ onFilterChange }) => {
         const resetFilters = {
             region: '',
             collar: '',
+            gender:'',
             date: '',
             search: ''
         };
