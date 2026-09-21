@@ -51,12 +51,10 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                 {/* ========== 圖片輪播區 ========== */}
                 <div className="card-image-wrapper">
                     <img 
-                        onClick={() => window.open(images[currentImageIndex], '_blank')}
                         src={images[currentImageIndex]} 
                         alt={dog.name}
                         className="card-image"
                         loading="lazy"
-                        title="點擊放大寵物照片"
                     />
                     
                     {/* 多張圖片時顯示左右切換按鈕 */}
@@ -121,7 +119,7 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                         </div>
                     </div>
                 </div>
- 
+
                 {/* ========== 卡片底部 ========== */}
                 <div className="card-footer">
                     {dog.createdAt && (
