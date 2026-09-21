@@ -117,7 +117,7 @@ const FilterSection = ({ onFilterChange }) => {
                         <input 
                             type="text" 
                             id="search" 
-                            placeholder="狗名或特徵..."
+                            placeholder="寵物名或特徵..."
                             value={filters.search}
                             onChange={(e) => handleFilterChange('search', e.target.value)}
                         />
