@@ -12,7 +12,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profile from './components/Profile/Profile';
 import toast, { Toaster } from 'react-hot-toast';
 
-function AppContent() {
+const AppContent = () => {
   const { currentUser } = useAuth();
   const headerHeight =
     document.querySelector('header')?.offsetHeight || 0;
@@ -34,7 +34,7 @@ function AppContent() {
     return 'home';
   };
 
-  const [currentPage, setCurrentPage] = useState(getInitialPage());
+  const [currentPage, setCurrentPage] = useState(getInitialPage);
 
   // ========== 監聽 URL hash 變化 ==========
   useEffect(() => {
@@ -394,7 +394,7 @@ function AppContent() {
 }
 
 // ========== App 主元件 ==========
-function App() {
+const App = () => {
   return (
     <AuthProvider>
       <Toaster
