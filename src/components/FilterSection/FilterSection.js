@@ -77,8 +77,8 @@ const FilterSection = ({ onFilterChange }) => {
                             onChange={(e) => handleFilterChange('gender', e.target.value)}
                         >
                             <option value="">全部</option>
-                            <option value="boy">男生</option>
-                            <option value="girl">女生</option>
+                            <option value="公">公</option>
+                            <option value="母">母</option>
                         </select>
                     </div>
 
@@ -91,8 +91,8 @@ const FilterSection = ({ onFilterChange }) => {
                             onChange={(e) => handleFilterChange('collar', e.target.value)}
                         >
                             <option value="">全部</option>
-                            <option value="yes">有項圈</option>
-                            <option value="no">無項圈</option>
+                            <option value="有項圈">有項圈</option>
+                            <option value="無項圈">無項圈</option>
                         </select>
                     </div>
 

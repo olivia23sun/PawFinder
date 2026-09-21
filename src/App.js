@@ -92,10 +92,13 @@ const AppContent = () => {
     }
 
     // 項圈篩選
-    if (filters.collar) {
-      result = result.filter(
-        (dog) => dog.collar === filters.collar
-      );
+if (filters.collar) {
+  result = result.filter((dog) => dog.collar === filters.collar);
+}
+
+    // 性別篩選
+    if (filters.gender) {
+      result = result.filter((dog) => dog.gender === filters.gender);
     }
 
     // 時間篩選

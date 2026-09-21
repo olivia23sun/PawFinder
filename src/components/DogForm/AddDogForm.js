@@ -57,6 +57,7 @@ const AddDogForm = ({ onSuccess }) => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     
+    
     // 檢查是否超過3張
     if (imageFiles.length + files.length > 3) {
       toast.error('最多只能上傳 3 張照片');

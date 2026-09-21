@@ -110,9 +110,9 @@ const DogCard = ({ dog, onEdit, onDelete, currentUserId }) => {
                             <span className={`badge ${dog.gender === '公' ? 'boy-gender' : 'girl-gender'}`}>
                                 {dog.gender}
                             </span>
-                            <span className={`badge ${dog.collar ? 'badge-collar' : 'badge-no-collar'}`}>
-                                {dog.collar ? '有項圈' : '無項圈'}
-                            </span>
+                            <span className={`badge ${dog.collar === '有項圈' ? 'badge-collar' : 'badge-no-collar'}`}>
+    {dog.collar}
+</span>
                         </div>
                         <div className="info-item">
                             💬 {dog.description}
